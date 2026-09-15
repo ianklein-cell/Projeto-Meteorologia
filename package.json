@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "projeto-meteorologia",
+=======
+  "name": "projeto-final",
+>>>>>>> 50b422dc93cb7670f389bcbf75b38efa75de2a1a
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,8 +15,12 @@
   },
   "dependencies": {
     "react": "^19.2.8",
+<<<<<<< HEAD
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.3"
+=======
+    "react-dom": "^19.2.8"
+>>>>>>> 50b422dc93cb7670f389bcbf75b38efa75de2a1a
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Brasil from "./pages/Brasil";
 import Japao from "./pages/Japao";
@@ -12,4 +13,10 @@ export default function App() {
       </Routes>
     </BrowserRouter>
   );
+=======
+export default function App() {
+  return (
+    <div>App</div>
+  )
+>>>>>>> 50b422dc93cb7670f389bcbf75b38efa75de2a1a
 }
