@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BuscarCidade, BuscarClima } from "../services/WeatherApi";
+import Forecast from "../componets/Forecast";
 
 export default function Brasil() {
   const [cidade, setCidade] = useState(null);
@@ -39,6 +40,7 @@ export default function Brasil() {
       <p>Umidade: {clima.current.relative_humidity_2m}%</p>
       <p>Vento {clima.current.wind_speed_10m}km/h</p>
       <p>Fuso horário: {cidade.timezone}</p>
+      <Forecast clima={clima} />
     </div>
   );
 }
