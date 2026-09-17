@@ -1,8 +1,8 @@
-export default function FavoriteButton({ cidade, favorito, onToglle }) {
+export default function FavoriteButton({ cidade, favorito, onToggle }) {
   return (
     <button
       className="favorite-button"
-      onClick={() => onToglle(cidade)}
+      onClick={() => onToggle(cidade)}
       type="button"
       aria-label={
         favorito

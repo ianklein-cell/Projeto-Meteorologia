@@ -9,7 +9,7 @@ export default function ForecastCard({ dia, maxima, minima, chuva }) {
         <strong>Mínima:</strong> {minima} °C
       </p>
       <p>
-        <strong>Chuva:</strong> {chuva}
+        <strong>Chuva:</strong> {chuva}%
       </p>
     </article>
   );
