@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
 import Brasil from "./pages/Brasil";
 import Japao from "./pages/Japao";
