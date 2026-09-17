@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BuscarCidade, BuscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
+import Forecast from "../components/Forecast";
 
 export default function Brasil() {
   const [cidade, setCidade] = useState(null);
@@ -40,6 +41,7 @@ export default function Brasil() {
       <p>Vento: {clima.current.wind_speed_10m} km/h</p>
       <p>Fuso horário: {cidade.timezone}</p>
       <Moon lat={cidade.latitude} lon={cidade.longitude} timezone={cidade.timezone} />
+      <Forecast clima={clima} />
     </div>
   );
 }
