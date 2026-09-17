@@ -333,3 +333,141 @@ main > p {
 .country-card-link:hover {
   background: #125487;
 }
+/* =========================
+   BUSCA DE CIDADES
+========================= */
+
+.search-bar {
+  position: relative;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.search-bar label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* Resultados da pesquisa */
+
+.resultado-pesquisa {
+  position: absolute;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.resultado-pesquisa button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.resultado-pesquisa button:hover {
+  background: #f1f5f9;
+}
+
+.nenhum-resultado {
+  margin-top: 8px;
+  color: #666;
+}
+
+/* =========================
+   BOTÃO FAVORITOS
+========================= */
+
+.favorite-button {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #facc15;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.favorite-button:hover {
+  transform: scale(1.03);
+  background: #eab308;
+}
+
+/* =========================
+   MENSAGENS
+========================= */
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  margin: 30px;
+}
+
+.error-message {
+  text-align: center;
+  color: #dc2626;
+  font-weight: bold;
+  margin: 30px;
+}
+
+/* =========================
+   INFORMAÇÕES DO CLIMA
+========================= */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 600px) {
+  main {
+    padding: 15px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .favorite-button {
+    width: 100%;
+  }
+}

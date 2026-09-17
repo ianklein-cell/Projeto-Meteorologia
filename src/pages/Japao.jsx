@@ -1,83 +1,106 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import { Link } from "react-router-dom";
 import Moon from "../components/Moon";
 import Forecast from "../components/Forecast";
-import WeatherCard from "../components/WatherCard";
-
-const CIDADES_JAPAO = [
-  { name: "Tóquio", lat: 35.6762, lon: 139.6503 },
-  { name: "Osaka", lat: 34.6937, lon: 135.5023 },
-  { name: "Quioto", lat: 35.0116, lon: 135.7681 },
-  { name: "Sapporo", lat: 43.0621, lon: 141.3544 },
-  { name: "Fukuoka", lat: 33.5904, lon: 130.4017 },
-];
+import WeatherCard from "../components/WeatherCard";
+import SearchBar from "../components/SearchBar";
 
 export default function Japao() {
-  const [cidadeSelecionada, setCidadeSelecionada] = useState(CIDADES_JAPAO[0]);
+  const [cidade, setCidade] = useState({
+    nome: "Tóquio",
+    latitude: 35.6762,
+    longitude: 139.6503,
+    timezone: "Asia/Tokyo",
+  });
+
   const [clima, setClima] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+
+  const [pesquisa, setPesquisa] = useState("");
+  const [resultados, setResultados] = useState([]);
+
+  useEffect(() => {
+    async function pesquisarCidade() {
+      if (pesquisa.trim().length < 3) {
+        setResultados([]);
+        return;
+      }
+
+      try {
+        const cidades = await BuscarCidades(pesquisa, "JP");
+        setResultados(cidades);
+      } catch (error) {
+        setResultados([]);
+      }
+    }
+
+    const timer = setTimeout(pesquisarCidade, 500);
+
+    return () => clearTimeout(timer);
+  }, [pesquisa]);
 
   useEffect(() => {
     async function carregarClima() {
-      setLoading(true);
+      setCarregando(true);
       setErro("");
+
       try {
-        const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${cidadeSelecionada.lat}&longitude=${cidadeSelecionada.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset&forecast_days=7&timezone=Asia%2FTokyo`,
+        const dadosClima = await BuscarClima(
+          cidade.latitude,
+          cidade.longitude,
+          cidade.timezone,
         );
 
-        if (!response.ok) {
-          throw new Error("Erro ao buscar o clima.");
-        }
-        const data = await response.json();
-        setClima(data);
+        setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
       } finally {
-        setLoading(false);
+        setCarregando(false);
       }
     }
+
     carregarClima();
-  }, [cidadeSelecionada]);
+  }, [cidade]);
+
+  function selecionarCidade(novaCidade) {
+    setCidade(novaCidade);
+    setPesquisa("");
+    setResultados([]);
+  }
+
   return (
     <div>
       <Link to="/">← Voltar para Home</Link>
+
       <h1>Meteorologia no Japão 🇯🇵</h1>
-      <div>
-        <label htmlFor="city-select">Selecione a cidade:</label>
-        <select
-          id="city-select"
-          value={cidadeSelecionada.name}
-          onChange={(event) => {
-            const cidade = CIDADES_JAPAO.find(
-              (item) => item.name === event.target.value,
-            );
-            setCidadeSelecionada(cidade);
-          }}
-        >
-          {CIDADES_JAPAO.map((cidade) => (
-            <option key={cidade.name} value={cidade.name}>
-              {cidade.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      {loading ? (
+
+      <SearchBar
+        valor={pesquisa}
+        onChange={setPesquisa}
+        resultados={resultados}
+        onSelecionar={selecionarCidade}
+      />
+
+      {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
         <p className="error-message">{erro}</p>
       ) : clima && clima.current ? (
         <div>
-          <WeatherCard cidade={cidadeSelecionada.name} clima={clima} />
+          <WeatherCard cidade={cidade.nome} clima={clima} />
+
           <p>
-            <strong>Fuso horário:</strong> {clima.timezone}
+            <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
+
           <Forecast clima={clima} />
+
           <Moon
-            lat={cidadeSelecionada.lat}
-            lon={cidadeSelecionada.lon}
-            timezone="Asia/Tokyo"
+            lat={cidade.latitude}
+            lon={cidade.longitude}
+            timezone={cidade.timezone}
           />
         </div>
       ) : (

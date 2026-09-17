@@ -1,54 +1,54 @@
 import { useEffect, useState } from "react";
-import { BuscarCidade, BuscarClima } from "../services/WeatherApi";
+import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
 import Forecast from "../components/Forecast";
-import WeatherCard from "../components/WatherCard";
-
-const CIDADES_BRASIL = [
-  {
-    name: "Rio de Janeiro",
-    busca: "Rio de Janeiro",
-  },
-  {
-    name: "São Paulo",
-    busca: "São Paulo",
-  },
-  {
-    name: "Brasília",
-    busca: "Brasília",
-  },
-  {
-    name: "Salvador",
-    busca: "Salvador",
-  },
-  {
-    name: "Porto Alegre",
-    busca: "Porto Alegre",
-  },
-];
+import WeatherCard from "../components/WeatherCard";
+import SearchBar from "../components/SearchBar";
+import FavoriteButton from "../components/FavoriteButton";
 
 export default function Brasil() {
-  const [cidadeSelecionada, setCidadeSelecionada] = useState(CIDADES_BRASIL[0]);
-
-  const [cidade, setCidade] = useState(null);
+  const [cidade, setCidade] = useState({
+    nome: "Rio de Janeiro",
+    latitude: -22.9068,
+    longitude: -43.1729,
+    timezone: "America/Sao_Paulo",
+  });
   const [clima, setClima] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+  const [pesquisa, setPesquisa] = useState("");
+  const [resultados, setResultados] = useState([]);
+  const [favoritos, setFavoritos] = useState(() => {
+    const salvos = localStorage.getItem("favoritos");
+    return salvos ? JSON.parse(salvos) : [];
+  });
+  useEffect(() => {
+    async function pesquisarCidade() {
+      if (pesquisa.trim().length < 3) {
+        setResultados([]);
+        return;
+      }
+      try {
+        const cidades = await BuscarCidades(pesquisa, "BR");
+        setResultados(cidades);
+      } catch (error) {
+        setResultados([]);
+      }
+    }
+    const timer = setTimeout(pesquisarCidade, 500);
+
+    return () => clearTimeout(timer);
+  }, [pesquisa]);
 
   useEffect(() => {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
-
       try {
-        const dadosCidade = await BuscarCidade(cidadeSelecionada.busca);
-
-        setCidade(dadosCidade);
-
         const dadosClima = await BuscarClima(
-          dadosCidade.latitude,
-          dadosCidade.longitude,
-          dadosCidade.timezone,
+          cidade.latitude,
+          cidade.longitude,
+          cidade.timezone,
         );
 
         setClima(dadosClima);
@@ -58,50 +58,48 @@ export default function Brasil() {
         setCarregando(false);
       }
     }
-
     carregarClima();
-  }, [cidadeSelecionada]);
-
+  }, [cidade]);
+  function selecionarCidade(novaCidade) {
+    setCidade(novaCidade);
+    setPesquisa("");
+    setResultados([]);
+  }
+  function alternarFavorito(nomeCidade) {
+    let novosFavoritos;
+    if (favoritos.includes(nomeCidade)) {
+      novosFavoritos = favoritos.filter((favorito) => favorito !== nomeCidade);
+    } else {
+      novosFavoritos = [...favoritos, nomeCidade];
+    }
+    setFavoritos(novosFavoritos);
+    localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
+  }
   return (
     <div>
       <h1>Brasil 🇧🇷</h1>
-
-      <div>
-        <label htmlFor="city-select">Selecione a cidade:</label>
-
-        <select
-          id="city-select"
-          value={cidadeSelecionada.name}
-          onChange={(event) => {
-            const cidade = CIDADES_BRASIL.find(
-              (item) => item.name === event.target.value,
-            );
-
-            setCidadeSelecionada(cidade);
-          }}
-        >
-          {CIDADES_BRASIL.map((cidade) => (
-            <option key={cidade.name} value={cidade.name}>
-              {cidade.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
+      <SearchBar
+        valor={pesquisa}
+        onChange={setPesquisa}
+        resultados={resultados}
+        onSelecionar={selecionarCidade}
+      />
       {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
         <p className="error-message">{erro}</p>
-      ) : cidade && clima && clima.current ? (
+      ) : clima && clima.current ? (
         <div>
           <WeatherCard cidade={cidade.nome} clima={clima} />
-
+          <FavoriteButton
+            cidade={cidade.nome}
+            favorito={favoritos.includes(cidade.nome)}
+            onToggle={alternarFavorito}
+          />
           <p>
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
-
           <Forecast clima={clima} />
-
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
