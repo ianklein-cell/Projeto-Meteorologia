@@ -4,6 +4,7 @@ import Brasil from "./pages/Brasil";
 import Japao from "./pages/Japao";
 import EUA from "./pages/EUA";
 import BloodMoon from "./components/BloodMoon";
+import Favoritos from "./pages/Favoritos";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/brasil" element={<Brasil />} />
         <Route path="/japao" element={<Japao />} />
         <Route path="/eua" element={<EUA />} />
+        <Route path="/favoritos" element={<Favoritos />} />
       </Routes>
     </div>
   );

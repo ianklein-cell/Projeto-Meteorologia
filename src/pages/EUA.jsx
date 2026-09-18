@@ -4,12 +4,15 @@ import Moon from "../components/Moon";
 import Forecast from "../components/Forecast";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
+import FavoriteButton from "../components/FavoriteButton";
 
 const IMAGEM_FUNDO = "https://static.vecteezy.com/ti/vetor-gratis/p1/3701314-icone-do-mapa-dos-eua-gratis-vetor.jpg"
 
 export default function EUA() {
   const [cidade, setCidade] = useState({
     nome: "Nova York",
+    pais: "Estados Unidos",
+    codigoPais: "US",
     latitude: 40.7128,
     longitude: -74.006,
     timezone: "America/New_York",
@@ -19,7 +22,17 @@ export default function EUA() {
   const [erro, setErro] = useState("");
   const [pesquisa, setPesquisa] = useState("");
   const [resultados, setResultados] = useState([]);
-
+  const [favoritos, setFavoritos] = useState(() => {
+    const salvos = localStorage.getItem("favoritos");
+    if (!salvos) {
+      return [];
+    }
+    try {
+      return JSON.parse(salvos);
+    } catch {
+      return [];
+    }
+  });
   useEffect(() => {
     async function pesquisarCidade() {
       if (pesquisa.trim().length < 3) {
@@ -29,7 +42,7 @@ export default function EUA() {
       try {
         const cidades = await BuscarCidades(pesquisa, "US");
         setResultados(cidades);
-      } catch (error) {
+      } catch {
         setResultados([]);
       }
     }
@@ -60,6 +73,32 @@ export default function EUA() {
     setPesquisa("");
     setResultados([]);
   }
+  function alternarFavorito() {
+    const jaFavoritado = favoritos.some(
+      (favorito) =>
+        favorito.nome === cidade.nome &&
+        favorito.codigoPais === cidade.codigoPais,
+    );
+    let novosFavoritos;
+    if (jaFavoritado) {
+      novosFavoritos = favoritos.filter(
+        (favorito) =>
+          !(
+            favorito.nome === cidade.nome &&
+            favorito.codigoPais === cidade.codigoPais
+          ),
+      );
+    } else {
+      novosFavoritos = [...favoritos, cidade];
+    }
+    setFavoritos(novosFavoritos);
+    localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
+  }
+  const favoritoAtual = favoritos.some(
+    (favorito) =>
+      favorito.nome === cidade.nome &&
+      favorito.codigoPais === cidade.codigoPais,
+  );
   return (
     <div style={{
         minHeight: "100vh",
@@ -86,6 +125,11 @@ export default function EUA() {
       ) : clima && clima.current ? (
         <div>
           <WeatherCard cidade={cidade.nome} clima={clima} />
+          <FavoriteButton
+            cidade={cidade}
+            favorito={favoritoAtual}
+            onToggle={alternarFavorito}
+          />
           <p>
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
