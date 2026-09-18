@@ -27,23 +27,28 @@ export default function EUA() {
   const [erro, setErro] = useState("");
   const [pesquisa, setPesquisa] = useState("");
   const [resultados, setResultados] = useState([]);
+
   const [favoritos, setFavoritos] = useState(() => {
     const salvos = localStorage.getItem("favoritos");
+
     if (!salvos) {
       return [];
     }
+
     try {
       return JSON.parse(salvos);
     } catch {
       return [];
     }
   });
+
   useEffect(() => {
     async function pesquisarCidade() {
       if (pesquisa.trim().length < 3) {
         setResultados([]);
         return;
       }
+
       try {
         const cidades = await BuscarCidades(pesquisa, "US");
         setResultados(cidades);
@@ -51,7 +56,9 @@ export default function EUA() {
         setResultados([]);
       }
     }
+
     const timer = setTimeout(pesquisarCidade, 500);
+
     return () => clearTimeout(timer);
   }, [pesquisa]);
 
@@ -66,6 +73,7 @@ export default function EUA() {
           cidade.longitude,
           cidade.timezone,
         );
+
         setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
@@ -73,20 +81,25 @@ export default function EUA() {
         setCarregando(false);
       }
     }
+
     carregarClima();
   }, [cidade]);
+
   function selecionarCidade(novaCidade) {
     setCidade(novaCidade);
     setPesquisa("");
     setResultados([]);
   }
+
   function alternarFavorito() {
     const jaFavoritado = favoritos.some(
       (favorito) =>
         favorito.nome === cidade.nome &&
         favorito.codigoPais === cidade.codigoPais,
     );
+
     let novosFavoritos;
+
     if (jaFavoritado) {
       novosFavoritos = favoritos.filter(
         (favorito) =>
@@ -98,9 +111,11 @@ export default function EUA() {
     } else {
       novosFavoritos = [...favoritos, cidade];
     }
+
     setFavoritos(novosFavoritos);
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
   }
+
   const favoritoAtual = favoritos.some(
     (favorito) =>
       favorito.nome === cidade.nome &&
@@ -129,14 +144,18 @@ export default function EUA() {
       }}
     >
       <Link to="/">← Voltar para Home</Link>
+
       <h1>Estados Unidos 🇺🇸</h1>
+
       <SearchBar
         valor={pesquisa}
         onChange={setPesquisa}
         resultados={resultados}
         onSelecionar={selecionarCidade}
       />
+
       <AlertCard tipo="tornado" lat={cidade.latitude} lon={cidade.longitude} />
+
       {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
@@ -144,15 +163,19 @@ export default function EUA() {
       ) : clima && clima.current ? (
         <div>
           <WeatherCard cidade={cidade.nome} clima={clima} />
+
           <FavoriteButton
             cidade={cidade}
             favorito={favoritoAtual}
             onToggle={alternarFavorito}
           />
+
           <p>
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
+
           <Forecast clima={clima} />
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

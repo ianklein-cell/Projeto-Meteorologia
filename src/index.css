@@ -3,19 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 :root {
   font-family: sans-serif;
   color: black;
   line-height: 1.5;
 }
-
 body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #eef5fb;
 }
-
 a {
   color: inherit;
   text-decoration: none;
