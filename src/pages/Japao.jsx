@@ -52,7 +52,6 @@ export default function Japao() {
     const timer = setTimeout(pesquisarCidade, 500);
     return () => clearTimeout(timer);
   }, [pesquisa]);
-
   useEffect(() => {
     async function carregarClima() {
       setCarregando(true);
@@ -104,7 +103,6 @@ export default function Japao() {
       favorito.nome === cidade.nome &&
       favorito.codigoPais === cidade.codigoPais,
   );
-
   return (
     <div
       style={{

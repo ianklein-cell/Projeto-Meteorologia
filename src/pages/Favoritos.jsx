@@ -60,7 +60,6 @@ export default function Favoritos() {
       setCarregando(false);
     }
   }
-
   function removerFavorito(cidade) {
     const novosFavoritos = favoritos.filter(
       (favorito) =>
@@ -77,7 +76,6 @@ export default function Favoritos() {
       return novosClimas;
     });
   }
-
   return (
     <div>
       <h1>Meus Favoritos</h1>

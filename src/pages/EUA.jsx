@@ -102,7 +102,6 @@ export default function EUA() {
       favorito.nome === cidade.nome &&
       favorito.codigoPais === cidade.codigoPais,
   );
-
   return (
     <div
       style={{

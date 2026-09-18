@@ -18,6 +18,7 @@ export default function Brasil() {
     longitude: -43.1729,
     timezone: "America/Sao_Paulo",
   });
+
   const [clima, setClima] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
@@ -139,6 +140,7 @@ export default function Brasil() {
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
           <Forecast clima={clima} />
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
