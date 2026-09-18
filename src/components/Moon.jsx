@@ -23,7 +23,6 @@ function formatarHorario(isoString) {
 export default function Moon({ lat, lon, timezone }) {
   const [dadosLua, setDadosLua] = useState(null);
   const [carregando, setCarregando] = useState(true);
-
   useEffect(() => {
     async function carregarDadosLua() {
       setCarregando(true);
@@ -39,15 +38,12 @@ export default function Moon({ lat, lon, timezone }) {
         setCarregando(false);
       }
     }
-
     if (lat && lon && timezone) {
       carregarDadosLua();
     }
   }, [lat, lon, timezone]);
-
   if (carregando) return <p>Carregando dados da lua...</p>;
   if (!dadosLua) return null;
-
   const faseValor = dadosLua.moon_phase[0];
   const nascerLua = dadosLua.moonrise[0];
   const porLua = dadosLua.moonset[0];

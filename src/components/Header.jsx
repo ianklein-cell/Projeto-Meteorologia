@@ -18,6 +18,9 @@ export default function Header() {
           <Link className="link-navegacao" to="/eua">
             EUA
           </Link>
+          <Link className="link-navegcao" to="/favoritos">
+            Favoritos
+          </Link>
         </nav>
       </div>
     </header>
