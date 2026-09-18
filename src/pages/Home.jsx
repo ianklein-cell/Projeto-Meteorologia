@@ -1,14 +1,17 @@
 import Header from "../components/Header";
 import CountryCard from "../components/CountryCard";
+import "./Home.css";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main>
-        <h1>Previsão do Tempo Mundial 🌍</h1>
-        <p>Consulte a meteorologia de diferentes países:</p>
-        <div className="countries-container">
+      <main className="homeContainer">
+        <section className="homeHero">
+          <h1>Previsão do Tempo ☂️</h1>
+          <p>Consulte a meteorologia dos países abaixo:</p>
+        </section>
+        <div className="countriesContainer">
           <CountryCard
             nome="Brasil"
             bandeira="🇧🇷"

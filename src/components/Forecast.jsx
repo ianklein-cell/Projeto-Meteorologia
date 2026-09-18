@@ -12,6 +12,7 @@ export default function Forecast({ clima }) {
             maxima={clima.daily.temperature_2m_max[index]}
             minima={clima.daily.temperature_2m_min[index]}
             chuva={clima.daily.precipitation_probability_max[index]}
+            weatherCode={clima.daily.weather_code[index]}
           />
         ))}
       </div>

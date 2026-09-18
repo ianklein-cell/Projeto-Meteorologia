@@ -7,6 +7,7 @@ import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
+import { identificarPeriodoDoDia } from "../utils/timezone";
 
 const IMAGEM_FUNDO =
   "https://static.vecteezy.com/ti/vetor-gratis/p1/3701314-icone-do-mapa-dos-eua-gratis-vetor.jpg";
@@ -20,6 +21,7 @@ export default function EUA() {
     longitude: -74.006,
     timezone: "America/New_York",
   });
+
   const [clima, setClima] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
@@ -52,10 +54,12 @@ export default function EUA() {
     const timer = setTimeout(pesquisarCidade, 500);
     return () => clearTimeout(timer);
   }, [pesquisa]);
+
   useEffect(() => {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
+
       try {
         const dadosClima = await BuscarClima(
           cidade.latitude,
@@ -102,15 +106,23 @@ export default function EUA() {
       favorito.nome === cidade.nome &&
       favorito.codigoPais === cidade.codigoPais,
   );
+  const periodoDoDia = clima?.current?.time
+    ? identificarPeriodoDoDia(
+        clima.current.time,
+        clima.daily.sunrise[0],
+        clima.daily.sunset[0],
+      )
+    : "dia";
   return (
     <div
+      className={`periodo-${periodoDoDia}`}
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("${IMAGEM_FUNDO}")`,
-        backgroundSize: "1000px",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        "--imagem-fundo": `url("${IMAGEM_FUNDO}")`,
+        backgroundSize: "100% 100%, 1000px",
+        backgroundPosition: "center, center",
+        backgroundRepeat: "no-repeat, no-repeat",
         backgroundAttachment: "fixed",
         padding: "20px",
         boxSizing: "border-box",

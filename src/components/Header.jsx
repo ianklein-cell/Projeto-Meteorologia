@@ -1,24 +1,22 @@
 import { Link } from "react-router-dom";
+import "./Header.css";
 
 export default function Header() {
   return (
     <header className="cabecalho">
-      <div className="conteudo-cabecalho">
-        <h2>Clima Mundial 🌍</h2>
+      <div className="conteudoCabecalho">
+        <h2>NOME DO SITE</h2>
         <nav className="navegacao">
-          <Link className="link-navegacao" to="/">
-            Início
-          </Link>
-          <Link className="link-navegacao" to="/brasil">
+          <Link className="linkNavegacao" to="/brasil">
             Brasil
           </Link>
-          <Link className="link-navegacao" to="/japao">
+          <Link className="linkNavegacao" to="/japao">
             Japão
           </Link>
-          <Link className="link-navegacao" to="/eua">
+          <Link className="linkNavegacao" to="/eua">
             EUA
           </Link>
-          <Link className="link-navegcao" to="/favoritos">
+          <Link className="linkNavegacao" to="/favoritos">
             Favoritos
           </Link>
         </nav>
