@@ -6,6 +6,8 @@ import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 
+const IMAGEM_FUNDO = "https://static.vecteezy.com/ti/vetor-gratis/p1/3331360-mapa-brasil-silhueta-com-bandeira-sobre-fundo-branco-gratis-vetor.jpg";
+
 export default function Brasil() {
   const [cidade, setCidade] = useState({
     nome: "Rio de Janeiro",
@@ -22,6 +24,7 @@ export default function Brasil() {
     const salvos = localStorage.getItem("favoritos");
     return salvos ? JSON.parse(salvos) : [];
   });
+
   useEffect(() => {
     async function pesquisarCidade() {
       if (pesquisa.trim().length < 3) {
@@ -60,11 +63,13 @@ export default function Brasil() {
     }
     carregarClima();
   }, [cidade]);
+
   function selecionarCidade(novaCidade) {
     setCidade(novaCidade);
     setPesquisa("");
     setResultados([]);
   }
+
   function alternarFavorito(nomeCidade) {
     let novosFavoritos;
     if (favoritos.includes(nomeCidade)) {
@@ -75,8 +80,21 @@ export default function Brasil() {
     setFavoritos(novosFavoritos);
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
   }
+
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "100vh",
+        width: "100%",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("${IMAGEM_FUNDO}")`,
+        backgroundSize: "1000px",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        padding: "20px",
+        boxSizing: "border-box",
+      }}
+    >
       <h1>Brasil 🇧🇷</h1>
       <SearchBar
         valor={pesquisa}

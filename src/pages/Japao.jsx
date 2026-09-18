@@ -6,6 +6,8 @@ import Forecast from "../components/Forecast";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 
+const IMAGEM_FUNDO = "https://media.istockphoto.com/id/2189197752/pt/vetorial/japan-the-country-silhouette-on-the-national-flag.jpg?s=612x612&w=0&k=20&c=DxwwAPbJNocH-nHDXuszDb8vZtxjhr0cJg38sQ15rS8="
+
 export default function Japao() {
   const [cidade, setCidade] = useState({
     nome: "Tóquio",
@@ -71,7 +73,17 @@ export default function Japao() {
   }
 
   return (
-    <div>
+    <div style={{
+        minHeight: "100vh",
+        width: "100%",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("${IMAGEM_FUNDO}")`,
+        backgroundSize: "1000px",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        padding: "20px",
+        boxSizing: "border-box",
+      }}>
       <Link to="/">← Voltar para Home</Link>
 
       <h1>Meteorologia no Japão 🇯🇵</h1>
