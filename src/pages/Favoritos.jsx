@@ -7,6 +7,7 @@ import Moon from "../components/Moon";
 export default function Favoritos() {
   const [favoritos, setFavoritos] = useState([]);
   const [climas, setClimas] = useState({});
+  const [cidadeAberta, setCidadeAberta] = useState(null);
   const [carregando, setCarregando] = useState(false);
   useEffect(() => {
     async function carregarFavoritos() {
@@ -45,6 +46,15 @@ export default function Favoritos() {
     carregarFavoritos();
   }, []);
   async function verClima(cidade) {
+    const chave = cidade.nome + cidade.codigoPais;
+    if (cidadeAberta === chave) {
+      setCidadeAberta(null);
+      return;
+    }
+    setCidadeAberta(chave);
+    if (climas[chave]) {
+      return;
+    }
     setCarregando(true);
     try {
       const clima = await BuscarClima(
@@ -68,6 +78,7 @@ export default function Favoritos() {
           favorito.codigoPais === cidade.codigoPais
         ),
     );
+    const chave = cidade.nome + cidade.codigoPais;
     setFavoritos(novosFavoritos);
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
     setClimas((anteriores) => {
@@ -75,6 +86,9 @@ export default function Favoritos() {
       delete novosClimas[cidade.nome + cidade.codigoPais];
       return novosClimas;
     });
+    if (cidadeAberta === chave) {
+      setCidadeAberta(null);
+    }
   }
   return (
     <div>
@@ -86,22 +100,23 @@ export default function Favoritos() {
           {favoritos.map((cidade) => {
             const chave = cidade.nome + cidade.codigoPais;
             const clima = climas[chave];
+            const aberto = cidadeAberta === chave;
             return (
               <div key={chave}>
                 <h2>
                   {cidade.nome} - {cidade.pais}
                 </h2>
-                <button
-                  type="button"
-                  onClick={() => verClima(cidade)}
-                  disabled={carregando}
-                >
-                  {carregando ? "Carregando..." : "Ver clima"}
+                <button type="button" onClick={() => verClima(cidade)}>
+                  {carregando && aberto
+                    ? "Carregando..."
+                    : aberto
+                      ? "Fechar clima"
+                      : "Ver clima"}
                 </button>
                 <button type="button" onClick={() => removerFavorito(cidade)}>
                   Remover dos favoritos
                 </button>
-                {clima && (
+                {aberto && clima && (
                   <div>
                     <WeatherCard cidade={cidade.nome} clima={clima} />
                     <p>
