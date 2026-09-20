@@ -27,6 +27,7 @@ export default function Home() {
             codigoPais="jp"
             descricao="Consulte a previsão do tempo no Japão."
             rota="/japao"
+            imagem="https://www.umviajante.com.br/wp-content/uploads/2025/09/passeio-monte-fuji-japao-guia-20.jpg"
           />
           <CountryCard
             nome="Estados Unidos"

@@ -8,6 +8,7 @@ import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
 import { identificarPeriodoDoDia } from "../utils/timezone";
+import "./Japao.css";
 
 const IMAGEM_FUNDO =
   "https://media.istockphoto.com/id/2189197752/pt/vetorial/japan-the-country-silhouette-on-the-national-flag.jpg?s=612x612&w=0&k=20&c=DxwwAPbJNocH-nHDXuszDb8vZtxjhr0cJg38sQ15rS8=";
@@ -132,7 +133,7 @@ export default function Japao() {
 
   return (
     <div
-      className={`periodo-${periodoDoDia}`}
+      className={`pagina-japao periodo-${periodoDoDia}`}
       style={{
         minHeight: "100vh",
         width: "100%",

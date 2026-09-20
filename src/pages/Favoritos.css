@@ -16,3 +16,80 @@
 .btnVoltar:hover {
   transform: translateX(-4px);
 }
+.listaFavoritos {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.favoritoItem {
+  padding: 25px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 20px rgba(20, 45, 70, 0.06);
+}
+.favoritoItem h2 {
+  margin-bottom: 18px;
+  color: #172033;
+}
+.botoesFavorito {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.botoesFavorito button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #1769aa;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.botoesFavorito button:hover {
+  background: #125487;
+}
+.climaFavorito {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.fusoFavorito {
+  margin: 0;
+}
+.favorito-japao {
+  border: 2px solid #bc002d;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.94),
+    rgba(255, 245, 247, 0.94)
+  );
+}
+.favorito-japao h2 {
+  color: #bc002d;
+}
+.favorito-japao .botoesFavorito button:first-child {
+  background: #bc002d;
+}
+.favorito-japao .botoesFavorito button:first-child:hover {
+  background: #8f0022;
+}
+.favorito-japao .climaFavorito {
+  padding-top: 5px;
+}
+@media (max-width: 600px) {
+  .favoritosContainer {
+    width: 92%;
+    padding: 25px 0;
+  }
+  .favoritoItem {
+    padding: 18px;
+  }
+  .botoesFavorito {
+    flex-direction: column;
+  }
+  .botoesFavorito button {
+    width: 100%;
+  }
+}
