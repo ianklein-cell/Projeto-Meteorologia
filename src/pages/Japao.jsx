@@ -144,7 +144,9 @@ export default function Japao() {
         boxSizing: "border-box",
       }}
     >
-      <Link to="/">← Voltar para Home</Link>
+      <Link to="/" className="btnVoltar">
+        ← Voltar para Home
+      </Link>
 
       <h1>
         Meteorologia no Japão{" "}
@@ -174,7 +176,11 @@ export default function Japao() {
         <p className="error-message">{erro}</p>
       ) : clima && clima.current ? (
         <div>
-          <WeatherCard cidade={cidade.nome} clima={clima} />
+          <WeatherCard
+            cidade={cidade.nome}
+            clima={clima}
+            codigoPais={cidade.codigoPais}
+          />
 
           <FavoriteButton
             cidade={cidade}
@@ -184,7 +190,7 @@ export default function Japao() {
           <p>
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
-          <Forecast clima={clima} />
+          <Forecast clima={clima} codigoPais={cidade.codigoPais} />
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

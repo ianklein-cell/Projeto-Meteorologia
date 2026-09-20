@@ -31,6 +31,7 @@ export default function Home() {
             codigoPais="us"
             descricao="Consulte a previsão do tempo nos Estados Unidos."
             rota="/eua"
+            imagem="https://cdn.prod.website-files.com/63b7026306af943f8e01771f/687e420e8fdcbd7127eb12f1_65f060ff6d6a4ebc9a43ab6a_times%2520square.webp"
           />
         </div>
       </main>

@@ -146,7 +146,11 @@
 }
 .alertaFixo {
   position: fixed;
+<<<<<<< HEAD
   right: 80px;
+=======
+  right: 25px;
+>>>>>>> 454688c (Mesclando alterações da dupla)
   bottom: 25px;
   z-index: 9999;
   display: flex;

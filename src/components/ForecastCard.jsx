@@ -7,7 +7,16 @@ import rain from "@meteocons/svg/fill/rain.svg";
 import snow from "@meteocons/svg/fill/snow.svg";
 import thunderstorms from "@meteocons/svg/fill/thunderstorms.svg";
 
-function obterCondicao(weatherCode) {
+function obterCondicao(weatherCode, codigoPais) {
+  const codigosNeve = [56, 57, 66, 67, 71, 73, 75, 77, 85, 86];
+
+  if (codigoPais === "BR" && codigosNeve.includes(weatherCode)) {
+    return {
+      icone: rain,
+      descricao: "Chuva",
+    };
+  }
+
   if (weatherCode === 0) {
     return {
       icone: clearDay,
@@ -79,14 +88,16 @@ function obterCondicao(weatherCode) {
     descricao: "Condição desconhecida",
   };
 }
+
 export default function ForecastCard({
   dia,
   maxima,
   minima,
   chuva,
   weatherCode,
+  codigoPais,
 }) {
-  const condicao = obterCondicao(weatherCode);
+  const condicao = obterCondicao(weatherCode, codigoPais);
   return (
     <article className="forecast-card">
       <h3>{dia}</h3>

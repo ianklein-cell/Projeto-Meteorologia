@@ -7,9 +7,17 @@ import Moon from "../components/Moon";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Favoritos.css";
 import "./Japao.css";
+import "./Brasil.css";
+import "./EUA.css";
 
 const IMAGEM_FUNDO_JAPAO =
   "https://media.istockphoto.com/id/2189197752/pt/vetorial/japan-the-country-silhouette-on-the-national-flag.jpg?s=612x612&w=0&k=20&c=DxwwAPbJNocH-nHDXuszDb8vZtxjhr0cJg38sQ15rS8=";
+
+const IMAGEM_FUNDO_BRASIL =
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dcf25b5f9397530889fb868bf3143ec391bbbd3d37763";
+
+const IMAGEM_FUNDO_EUA =
+  "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
 
 export default function Favoritos() {
   const [favoritos, setFavoritos] = useState([]);
@@ -74,15 +82,36 @@ export default function Favoritos() {
     setCarregando(true);
 
     try {
-      const clima = await BuscarClima(
+      const climaDados = await BuscarClima(
         cidade.latitude,
         cidade.longitude,
         cidade.timezone,
       );
 
+      let climaTratado = climaDados;
+
+      if (cidade.codigoPais === "BR") {
+        const codigosNeve = [56, 57, 66, 67, 71, 73, 75, 77, 85, 86];
+        climaTratado = {
+          ...climaDados,
+          current: {
+            ...climaDados.current,
+            weather_code: codigosNeve.includes(climaDados.current?.weather_code)
+              ? 61
+              : climaDados.current?.weather_code,
+          },
+          daily: {
+            ...climaDados.daily,
+            weather_code: climaDados.daily?.weather_code?.map((codigo) =>
+              codigosNeve.includes(codigo) ? 61 : codigo
+            ),
+          },
+        };
+      }
+
       setClimas((anteriores) => ({
         ...anteriores,
-        [chave]: clima,
+        [chave]: climaTratado,
       }));
     } finally {
       setCarregando(false);
@@ -132,9 +161,17 @@ export default function Favoritos() {
             const aberto = cidadeAberta === chave;
 
             const classePais =
-              cidade.codigoPais === "JP" ? " favorito-japao" : "";
+              cidade.codigoPais === "JP"
+                ? " favorito-japao"
+                : cidade.codigoPais === "BR"
+                  ? " favorito-brasil"
+                  : cidade.codigoPais === "US"
+                    ? " favorito-eua"
+                    : "";
 
             const japones = cidade.codigoPais === "JP";
+            const brasileiro = cidade.codigoPais === "BR";
+            const americano = cidade.codigoPais === "US";
 
             const periodoDoDia =
               clima?.current?.time &&
@@ -172,23 +209,49 @@ export default function Favoritos() {
                     className={
                       japones
                         ? `climaFavorito pagina-japao periodo-${periodoDoDia}`
-                        : "climaFavorito"
+                        : brasileiro
+                          ? `climaFavorito paginaBrasil periodo-${periodoDoDia}`
+                          : americano
+                            ? `climaFavorito pagina-eua periodo-${periodoDoDia}`
+                            : "climaFavorito"
                     }
                     style={
                       japones
                         ? {
                             "--imagem-fundo": `url("${IMAGEM_FUNDO_JAPAO}")`,
                           }
-                        : undefined
+                        : brasileiro
+                          ? {
+                              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${IMAGEM_FUNDO_BRASIL}")`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                              backgroundRepeat: "no-repeat",
+                              borderRadius: "16px",
+                              padding: "20px",
+                            }
+                          : americano
+                            ? {
+                                backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url("${IMAGEM_FUNDO_EUA}")`,
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat",
+                                borderRadius: "16px",
+                                padding: "20px",
+                              }
+                            : undefined
                     }
                   >
-                    <WeatherCard cidade={cidade.nome} clima={clima} />
+                    <WeatherCard
+                      cidade={cidade.nome}
+                      clima={clima}
+                      codigoPais={cidade.codigoPais}
+                    />
 
                     <p>
                       <strong>Fuso horário:</strong> {cidade.timezone}
                     </p>
 
-                    <Forecast clima={clima} />
+                    <Forecast clima={clima} codigoPais={cidade.codigoPais} />
 
                     <Moon
                       lat={cidade.latitude}

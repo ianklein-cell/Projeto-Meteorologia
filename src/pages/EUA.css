@@ -1,0 +1,345 @@
+.pagina-eua {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #0f172a;
+}
+
+.pagina-eua::before {
+  content: "🗽";
+  position: absolute;
+  top: 40px;
+  right: 5%;
+  font-size: 70px;
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.pagina-eua::after {
+  content: "⭐  ⭐  ⭐";
+  position: absolute;
+  bottom: 40px;
+  left: 4%;
+  font-size: 26px;
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.pagina-eua .btnVoltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e3a8a;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+  transition: all 0.2s ease;
+}
+
+.pagina-eua .btnVoltar:hover {
+  background: #1e40af;
+  transform: translateY(-2px);
+}
+
+.pagina-eua > h1 {
+  margin-bottom: 25px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.2rem;
+  letter-spacing: -0.5px;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+}
+
+.pagina-eua .secaoBusca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+}
+
+.pagina-eua .secaoBusca > :first-child {
+  flex: 1;
+  display: flex;
+}
+
+.pagina-eua input {
+  width: 100%;
+  height: 48px;
+  border: 2px solid #1e3a8a;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  padding: 0 16px;
+  outline: none;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  margin: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pagina-eua input:focus {
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.25);
+}
+
+.pagina-eua .favoriteButton,
+.pagina-eua .favorite-button,
+.pagina-eua .secaoBusca button {
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #b91c1c;
+  background: #1e3a8a;
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 0 20px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pagina-eua .favoriteButton:hover,
+.pagina-eua .favorite-button:hover,
+.pagina-eua .secaoBusca button:hover {
+  background: #b91c1c;
+  border-color: #1e3a8a;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(185, 28, 28, 0.4);
+}
+
+.pagina-eua .conteudoClima {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pagina-eua .weatherCard,
+.pagina-eua .weather-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid #1e3a8a;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.35);
+  padding: 28px;
+}
+
+.pagina-eua .weatherCard::before,
+.pagina-eua .weather-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 45%, #b91c1c 100%);
+}
+
+.pagina-eua .weatherCard h2,
+.pagina-eua .weather-card h2 {
+  color: #1e3a8a;
+  border-bottom: 2px solid #b91c1c;
+  padding-bottom: 12px;
+  margin-top: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.pagina-eua .weatherTemperatura,
+.pagina-eua .weather-temperatura {
+  color: #b91c1c;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.pagina-eua .weatherInfo p,
+.pagina-eua .weather-info p {
+  background: #eff6ff;
+  border: 1px solid rgba(30, 58, 138, 0.25);
+  border-left: 4px solid #1e3a8a;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.pagina-eua .forecastContainer,
+.pagina-eua .forecast-container {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pagina-eua .forecastCard,
+.pagina-eua .forecast-card {
+  position: relative;
+  overflow: hidden;
+  padding: 16px 6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1.5px solid rgba(30, 58, 138, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.pagina-eua .forecastCard::before,
+.pagina-eua .forecast-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1e3a8a, #b91c1c);
+}
+
+.pagina-eua .forecastCard:hover,
+.pagina-eua .forecast-card:hover {
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: #b91c1c;
+  box-shadow: 0 10px 24px rgba(185, 28, 28, 0.25);
+}
+
+.pagina-eua .forecastCard h3,
+.pagina-eua .forecast-card h3 {
+  margin-bottom: 8px;
+  color: #1e3a8a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pagina-eua .forecastCard p,
+.pagina-eua .forecast-card p {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: #334155;
+}
+
+.pagina-eua .forecastCard strong,
+.pagina-eua .forecast-card strong {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.pagina-eua .textoFuso {
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin: 2px 0;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+}
+
+.pagina-eua .textoFuso strong {
+  color: #93c5fd;
+}
+
+.pagina-eua .loading {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.1rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.pagina-eua .errorMessage,
+.pagina-eua .error-message {
+  color: #991b1b;
+  text-align: center;
+  padding: 12px;
+  background: #fee2e2;
+  border-radius: 12px;
+  border: 1.5px solid #f87171;
+  font-weight: 600;
+}
+
+.pagina-eua .mensagemAviso {
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.pagina-eua .forecastContainer h2,
+.pagina-eua .forecast-container h2,
+.pagina-eua .moonContainer h2,
+.pagina-eua .moon-container h2,
+.pagina-eua .conteudoClima h2,
+.pagina-eua .conteudoClima h3 {
+  color: #ffffff !important;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7) !important;
+}
+
+.pagina-eua .moonContainer,
+.pagina-eua .moon-container,
+.pagina-eua .moonCard,
+.pagina-eua .moon-card {
+  color: #ffffff !important;
+}
+
+.pagina-eua .moonContainer p,
+.pagina-eua .moon-container p,
+.pagina-eua .moonCard p,
+.pagina-eua .moon-card p,
+.pagina-eua .moonContainer span,
+.pagina-eua .moon-container span {
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+  font-weight: 600;
+}
+
+.pagina-eua .moonContainer strong,
+.pagina-eua .moon-container strong {
+  color: #93c5fd !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8) !important;
+}
+
+@media (max-width: 1000px) {
+  .pagina-eua .forecastContainer,
+  .pagina-eua .forecast-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pagina-eua > h1 {
+    font-size: 1.8rem;
+  }
+  .pagina-eua .secaoBusca {
+    max-width: 100%;
+  }
+  .pagina-eua .forecastContainer,
+  .pagina-eua .forecast-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pagina-eua::before {
+    top: 80px;
+    right: 3%;
+    font-size: 50px;
+  }
+}

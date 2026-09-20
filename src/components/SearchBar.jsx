@@ -1,3 +1,5 @@
+import "./SearchBar.css";
+
 export default function SearchBar({
   valor,
   onChange,
@@ -5,31 +7,23 @@ export default function SearchBar({
   onSelecionar,
 }) {
   return (
-    <div className="search-bar">
-      <label htmlFor="pesquisa-cidade">Pesquisar cidade</label>
+    <div className="searchBarContainer">
       <input
-        id="pesquisa-cidade"
-        type="search"
-        placeholder="Digite o nome da cidade..."
+        type="text"
+        placeholder="Buscar cidade..."
         value={valor}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={(e) => onChange(e.target.value)}
       />
-      {valor && resultados.length > 0 && (
-        <div className="resultado-pesquisa">
+
+      {resultados.length > 0 && (
+        <ul className="resultadosBusca">
           {resultados.map((cidade, index) => (
-            <button
-              key={`${cidade.nome}-${cidade.latitude}-${index}`}
-              type="button"
-              onClick={() => onSelecionar(cidade)}
-            >
-              <strong>{cidade.nome}</strong>
-              {cidade.estado && ` - ${cidade.estado}`}
-            </button>
+            <li key={index} onClick={() => onSelecionar(cidade)}>
+              {cidade.nome} {cidade.estado ? `- ${cidade.estado}` : ""} (
+              {cidade.pais})
+            </li>
           ))}
-        </div>
-      )}
-      {valor && resultados.length === 0 && valor.length >= 3 && (
-        <p className="nenhum-resultado">Nenhuma cidade encontrada.</p>
+        </ul>
       )}
     </div>
   );

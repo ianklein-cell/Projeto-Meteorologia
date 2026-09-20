@@ -8,9 +8,10 @@ import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
 import { identificarPeriodoDoDia } from "../utils/timezone";
+import "./EUA.css";
 
 const IMAGEM_FUNDO =
-  "https://static.vecteezy.com/ti/vetor-gratis/p1/3701314-icone-do-mapa-dos-eua-gratis-vetor.jpg";
+  "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
 
 export default function EUA() {
   const [cidade, setCidade] = useState({
@@ -115,6 +116,7 @@ export default function EUA() {
       favorito.nome === cidade.nome &&
       favorito.codigoPais === cidade.codigoPais,
   );
+
   const periodoDoDia = clima?.current?.time
     ? identificarPeriodoDoDia(
         clima.current.time,
@@ -122,54 +124,69 @@ export default function EUA() {
         clima.daily.sunset[0],
       )
     : "dia";
+
   return (
     <div
-      className={`periodo-${periodoDoDia}`}
+      className={`pagina-eua periodo-${periodoDoDia}`}
       style={{
         minHeight: "100vh",
         width: "100%",
-        "--imagem-fundo": `url("${IMAGEM_FUNDO}")`,
-        backgroundSize: "100% 100%, 1000px",
-        backgroundPosition: "center, center",
-        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url("${IMAGEM_FUNDO}")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
         padding: "20px",
         boxSizing: "border-box",
       }}
     >
-      <Link to="/">← Voltar para Home</Link>
+      <Link to="/" className="btnVoltar">
+        ← Voltar para Home
+      </Link>
+
       <h1>
-  Meteorologia no Estados Unidos{" "}
-  <img
-    src="https://flagcdn.com/w40/us.png"
-    alt="Bandeira dos Estados Unidos"
-    className="bandeiraHeader"
-  />
-</h1>
-      <SearchBar
-        valor={pesquisa}
-        onChange={setPesquisa}
-        resultados={resultados}
-        onSelecionar={selecionarCidade}
-      />
+        Meteorologia no Estados Unidos{" "}
+        <img
+          src="https://flagcdn.com/w40/us.png"
+          alt="Bandeira dos Estados Unidos"
+          className="bandeiraHeader"
+        />
+      </h1>
+
+      <div className="secaoBusca">
+        <SearchBar
+          valor={pesquisa}
+          onChange={setPesquisa}
+          resultados={resultados}
+          onSelecionar={selecionarCidade}
+        />
+        <FavoriteButton
+          cidade={cidade}
+          favorito={favoritoAtual}
+          onToggle={alternarFavorito}
+        />
+      </div>
+
       <AlertCard tipo="tornado" lat={cidade.latitude} lon={cidade.longitude} />
+
       {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
         <p className="error-message">{erro}</p>
       ) : clima && clima.current ? (
-        <div>
-          <WeatherCard cidade={cidade.nome} clima={clima} />
-
-          <FavoriteButton
-            cidade={cidade}
-            favorito={favoritoAtual}
-            onToggle={alternarFavorito}
+        <div className="conteudoClima">
+          <WeatherCard
+            cidade={cidade.nome}
+            clima={clima}
+            codigoPais={cidade.codigoPais}
           />
-          <p>
+
+          <p className="textoFuso">
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
-          <Forecast clima={clima} />
+
+          <Forecast clima={clima} codigoPais={cidade.codigoPais} />
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
@@ -177,7 +194,9 @@ export default function EUA() {
           />
         </div>
       ) : (
-        <p>Não foi possível carregar os dados meteorológicos.</p>
+        <p className="mensagemAviso">
+          Não foi possível carregar os dados meteorológicos.
+        </p>
       )}
     </div>
   );

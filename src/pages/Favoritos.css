@@ -16,11 +16,13 @@
 .btnVoltar:hover {
   transform: translateX(-4px);
 }
+
 .listaFavoritos {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
+
 .favoritoItem {
   padding: 25px;
   border-radius: 18px;
@@ -28,16 +30,19 @@
   border: 1px solid #e2e8f0;
   box-shadow: 0 8px 20px rgba(20, 45, 70, 0.06);
 }
+
 .favoritoItem h2 {
   margin-bottom: 18px;
   color: #172033;
 }
+
 .botoesFavorito {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
+
 .botoesFavorito button {
   padding: 10px 16px;
   border: 0;
@@ -48,17 +53,21 @@
   cursor: pointer;
   transition: background 0.2s ease;
 }
+
 .botoesFavorito button:hover {
   background: #125487;
 }
+
 .climaFavorito {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
+
 .fusoFavorito {
   margin: 0;
 }
+
 .favorito-japao {
   border: 2px solid #bc002d;
   background: linear-gradient(
@@ -66,18 +75,71 @@
     rgba(255, 245, 247, 0.94)
   );
 }
+
 .favorito-japao h2 {
   color: #bc002d;
 }
+
 .favorito-japao .botoesFavorito button:first-child {
   background: #bc002d;
 }
+
 .favorito-japao .botoesFavorito button:first-child:hover {
   background: #8f0022;
 }
+
 .favorito-japao .climaFavorito {
   padding-top: 5px;
 }
+
+.favorito-brasil {
+  border: 2px solid #047857;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.94),
+    rgba(240, 253, 244, 0.94)
+  );
+}
+
+.favorito-brasil h2 {
+  color: #047857;
+}
+
+.favorito-brasil .botoesFavorito button:first-child {
+  background: #047857;
+}
+
+.favorito-brasil .botoesFavorito button:first-child:hover {
+  background: #065f46;
+}
+
+.favorito-brasil .climaFavorito {
+  padding-top: 5px;
+}
+
+.favorito-eua {
+  border: 2px solid #1e40af;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.94),
+    rgba(240, 244, 255, 0.94)
+  );
+}
+
+.favorito-eua h2 {
+  color: #1e40af;
+}
+
+.favorito-eua .botoesFavorito button:first-child {
+  background: #1e40af;
+}
+
+.favorito-eua .botoesFavorito button:first-child:hover {
+  background: #1e3a8a;
+}
+
+.favorito-eua .climaFavorito {
+  padding-top: 5px;
+}
+
 @media (max-width: 600px) {
   .favoritosContainer {
     width: 92%;

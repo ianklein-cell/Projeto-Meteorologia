@@ -47,7 +47,7 @@ export async function BuscarClima(latitude, longitude, timezone = "auto") {
     current:
       "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,uv_index,snowfall",
     daily:
-      "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset",
+      "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max",
     forecast_days: 7,
   });
   const response = await fetch(`${WEATHER_API}?${params}`);
