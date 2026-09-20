@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import WeatherCard from "../components/WeatherCard";
 import Forecast from "../components/Forecast";
+import ForecastGraph from "../components/ForecastGraph";
 import Moon from "../components/Moon";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Favoritos.css";
@@ -103,7 +104,7 @@ export default function Favoritos() {
           daily: {
             ...climaDados.daily,
             weather_code: climaDados.daily?.weather_code?.map((codigo) =>
-              codigosNeve.includes(codigo) ? 61 : codigo
+              codigosNeve.includes(codigo) ? 61 : codigo,
             ),
           },
         };
@@ -252,6 +253,12 @@ export default function Favoritos() {
                     </p>
 
                     <Forecast clima={clima} codigoPais={cidade.codigoPais} />
+                    <ForecastGraph
+                      clima={clima}
+                      nomeCidade={cidade.nome}
+                      timezone={cidade.timezone}
+                      codigoPais={cidade.codigoPais}
+                    />
 
                     <Moon
                       lat={cidade.latitude}

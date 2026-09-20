@@ -146,8 +146,8 @@
 }
 .alertaFixo {
   position: fixed;
-  right: 25px;
-  bottom: 25px;
+  right: 80px;
+  bottom: 15px;
   z-index: 9999;
   display: flex;
   align-items: center;

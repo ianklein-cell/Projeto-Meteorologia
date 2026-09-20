@@ -1,0 +1,215 @@
+.graficoPrevisao {
+  width: 100%;
+  margin-top: 25px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 2px solid #dbe4ea;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+/* =========================
+   BRASIL 🇧🇷
+========================= */
+
+.graficoPrevisao.grafico-br {
+  border: 2px solid #047857;
+  box-shadow: 0 8px 25px rgba(4, 120, 87, 0.15);
+}
+
+.graficoPrevisao.grafico-br::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #047857 0%, #10b981 45%, #f59e0b 100%);
+}
+
+/* =========================
+   JAPÃO 🇯🇵
+========================= */
+
+.graficoPrevisao.grafico-jp {
+  border: 2px solid #bc002d;
+  box-shadow: 0 8px 25px rgba(188, 0, 45, 0.16);
+}
+
+.graficoPrevisao.grafico-jp::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #bc002d 0%, #ffffff 50%, #bc002d 100%);
+}
+
+.graficoPrevisao.grafico-jp::after {
+  content: "🌸";
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 24px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* =========================
+   ESTADOS UNIDOS 🇺🇸
+========================= */
+
+.graficoPrevisao.grafico-us {
+  border: 2px solid #1e3a8a;
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.18);
+}
+
+.graficoPrevisao.grafico-us::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 45%, #b91c1c 100%);
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.graficoCabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.graficoCabecalho h2 {
+  margin: 0;
+  color: #003b5c;
+  font-size: 22px;
+}
+
+/* Brasil */
+
+.grafico-br .graficoCabecalho h2 {
+  color: #047857;
+}
+
+/* Japão */
+
+.grafico-jp .graficoCabecalho h2 {
+  color: #bc002d;
+}
+
+/* EUA */
+
+.grafico-us .graficoCabecalho h2 {
+  color: #1e3a8a;
+}
+
+/* =========================
+   OPÇÕES
+========================= */
+
+.graficoOpcoes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0 10px;
+  flex-wrap: wrap;
+}
+
+.graficoOpcoes button {
+  border: none;
+  background: transparent;
+  color: #777;
+  padding: 10px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+
+.graficoOpcoes button:hover {
+  background: #f1f1f1;
+  transform: translateY(-1px);
+}
+
+/* Brasil */
+
+.grafico-br .graficoOpcoes button.opcaoAtiva {
+  background: #047857;
+  color: white;
+  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
+}
+
+/* Japão */
+
+.grafico-jp .graficoOpcoes button.opcaoAtiva {
+  background: #bc002d;
+  color: white;
+  box-shadow: 0 4px 12px rgba(188, 0, 45, 0.25);
+}
+
+/* EUA */
+
+.grafico-us .graficoOpcoes button.opcaoAtiva {
+  background: #1e3a8a;
+  color: white;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+}
+
+/* =========================
+   ÁREA DO GRÁFICO
+========================= */
+
+.graficoArea {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 600px) {
+  .graficoPrevisao {
+    padding: 18px 10px;
+    border-radius: 15px;
+  }
+
+  .graficoCabecalho h2 {
+    font-size: 18px;
+  }
+
+  .graficoOpcoes {
+    gap: 4px;
+    margin-top: 18px;
+  }
+
+  .graficoOpcoes button {
+    padding: 8px 9px;
+    font-size: 12px;
+  }
+
+  .graficoArea {
+    margin-left: -5px;
+    width: calc(100% + 10px);
+  }
+
+  .grafico-jp::after {
+    font-size: 18px;
+    right: 10px;
+    top: 8px;
+  }
+}

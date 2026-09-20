@@ -7,6 +7,7 @@ import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
+import ForecastGraph from "../components/ForecastGraph";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Japao.css";
 
@@ -192,6 +193,12 @@ export default function Japao() {
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
+          <ForecastGraph
+            clima={clima}
+            nomeCidade={cidade.nome}
+            timezone={cidade.timezone}
+            codigoPais={cidade.codigoPais}
+          />
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
