@@ -90,7 +90,6 @@ export default function ForecastCard({
   return (
     <article className="forecast-card">
       <h3>{dia}</h3>
-
       <div className="icone-tempo">
         <img
           src={condicao.icone}

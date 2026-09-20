@@ -10,6 +10,7 @@
   border: 1px solid #e2e8f0;
   box-shadow: 0 8px 20px rgba(20, 45, 70, 0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
 }
 
 .countryCard:hover {
@@ -25,9 +26,12 @@
   margin-bottom: 12px;
 }
 
-.countryFlag {
-  font-size: 3.2rem;
-  line-height: 1;
+.countryFlagImg {
+  width: 52px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .countryCard h2 {
@@ -50,9 +54,24 @@
   background: #1769aa;
   color: #ffffff;
   font-weight: 600;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .countryCardLink:hover {
   background: #125487;
+}
+
+.countryCard.comImagem h2,
+.countryCard.comImagem p {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.countryCard.comImagem .countryCardLink {
+  background: #ffffff;
+  color: #1769aa;
+}
+
+.countryCard.comImagem .countryCardLink:hover {
+  background: #e7f2fb;
 }

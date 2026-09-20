@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className="cabecalho">
       <div className="conteudoCabecalho">
-        <h2>NOME DO SITE</h2>
+        <h1>Clima Nexus</h1>
         <nav className="navegacao">
           <Link className="linkNavegacao" to="/brasil">
             Brasil

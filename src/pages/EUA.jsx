@@ -27,7 +27,6 @@ export default function EUA() {
   const [erro, setErro] = useState("");
   const [pesquisa, setPesquisa] = useState("");
   const [resultados, setResultados] = useState([]);
-
   const [favoritos, setFavoritos] = useState(() => {
     const salvos = localStorage.getItem("favoritos");
 
@@ -56,9 +55,7 @@ export default function EUA() {
         setResultados([]);
       }
     }
-
     const timer = setTimeout(pesquisarCidade, 500);
-
     return () => clearTimeout(timer);
   }, [pesquisa]);
 
@@ -66,14 +63,12 @@ export default function EUA() {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
-
       try {
         const dadosClima = await BuscarClima(
           cidade.latitude,
           cidade.longitude,
           cidade.timezone,
         );
-
         setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
@@ -81,7 +76,6 @@ export default function EUA() {
         setCarregando(false);
       }
     }
-
     carregarClima();
   }, [cidade]);
 
@@ -144,18 +138,14 @@ export default function EUA() {
       }}
     >
       <Link to="/">← Voltar para Home</Link>
-
       <h1>Estados Unidos 🇺🇸</h1>
-
       <SearchBar
         valor={pesquisa}
         onChange={setPesquisa}
         resultados={resultados}
         onSelecionar={selecionarCidade}
       />
-
       <AlertCard tipo="tornado" lat={cidade.latitude} lon={cidade.longitude} />
-
       {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
@@ -169,13 +159,10 @@ export default function EUA() {
             favorito={favoritoAtual}
             onToggle={alternarFavorito}
           />
-
           <p>
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
-
           <Forecast clima={clima} />
-
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

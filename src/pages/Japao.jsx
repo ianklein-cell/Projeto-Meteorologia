@@ -175,13 +175,10 @@ export default function Japao() {
             favorito={favoritoAtual}
             onToggle={alternarFavorito}
           />
-
           <p>
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
-
           <Forecast clima={clima} />
-
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

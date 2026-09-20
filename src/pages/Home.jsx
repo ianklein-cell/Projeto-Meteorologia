@@ -2,6 +2,9 @@ import Header from "../components/Header";
 import CountryCard from "../components/CountryCard";
 import "./Home.css";
 
+const IMAGEM_BRASIL =
+  "https://bondinhowebsitestgprd.blob.core.windows.net/bondinho-website-str-container-prd//image_80_c3e3947c99.png";
+
 export default function Home() {
   return (
     <>
@@ -14,19 +17,20 @@ export default function Home() {
         <div className="countriesContainer">
           <CountryCard
             nome="Brasil"
-            bandeira="🇧🇷"
+            codigoPais="br"
             descricao="Consulte a previsão do tempo no Brasil."
             rota="/brasil"
+            imagemFundo={IMAGEM_BRASIL}
           />
           <CountryCard
             nome="Japão"
-            bandeira="🇯🇵"
+            codigoPais="jp"
             descricao="Consulte a previsão do tempo no Japão."
             rota="/japao"
           />
           <CountryCard
             nome="Estados Unidos"
-            bandeira="🇺🇸"
+            codigoPais="us"
             descricao="Consulte a previsão do tempo nos Estados Unidos."
             rota="/eua"
           />

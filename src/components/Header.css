@@ -15,8 +15,8 @@
   gap: 30px;
 }
 
-.conteudoCabecalho h2 {
-  font-size: 1.4rem;
+.conteudoCabecalho h1 {
+  font-size: 2rem;
   font-weight: 700;
   color: #1769aa;
   white-space: nowrap;

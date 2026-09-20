@@ -3,13 +3,30 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 120px);
+  min-height: 100vh;
   padding: 40px 20px;
   text-align: center;
+  box-sizing: border-box;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.25),
+      rgba(255, 255, 255, 0.25)
+    ),
+    url("https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?q=80&w=1920&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .homeHero {
   margin-bottom: 35px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 20px 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .homeHero h1 {
@@ -20,7 +37,7 @@
 
 .homeHero p {
   font-size: 1.1rem;
-  color: #536174;
+  color: #334155;
   max-width: 500px;
   margin: 0 auto;
 }
