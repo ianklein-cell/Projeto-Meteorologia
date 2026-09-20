@@ -17,11 +17,7 @@ export default function Home() {
             codigoPais="br"
             descricao="Consulte a previsão do tempo no Brasil."
             rota="/brasil"
-<<<<<<< HEAD
             imagem="/CardBrasil.webp"
-=======
-            imagem={IMAGEM_BRASIL}
->>>>>>> origin/main
           />
           <CountryCard
             nome="Japão"
