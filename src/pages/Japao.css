@@ -1,0 +1,204 @@
+.pagina-japao {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #292929;
+}
+.pagina-japao::before,
+.pagina-japao::after {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.pagina-japao::before {
+  content: "🌸";
+  top: 40px;
+  right: 5%;
+  font-size: 70px;
+}
+.pagina-japao::after {
+  content: "🌸  🌸  🌸";
+  bottom: 40px;
+  left: 4%;
+  font-size: 30px;
+  opacity: 0.45;
+}
+.pagina-japao > a {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #bc002d;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+.pagina-japao > a:hover {
+  color: #8f0022;
+}
+.pagina-japao > h1 {
+  margin-bottom: 25px;
+  color: #bc002d;
+  text-align: center;
+  font-size: 2.2rem;
+  text-shadow: 0 2px 8px rgba(188, 0, 45, 0.15);
+}
+.pagina-japao .weather-card {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #bc002d;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(90, 20, 35, 0.18);
+  padding: 25px;
+}
+.pagina-japao .weather-card::before {
+  content: "🌸";
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  opacity: 0.7;
+}
+.pagina-japao .weather-card h2 {
+  color: #bc002d;
+  border-bottom: 2px solid rgba(188, 0, 45, 0.2);
+  padding-bottom: 10px;
+}
+.pagina-japao .weather-temperatura {
+  color: #bc002d;
+  font-weight: 700;
+}
+.pagina-japao .weather-info p {
+  background: #fff5f7;
+  border: 1px solid rgba(188, 0, 45, 0.15);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+.pagina-japao .weather-info strong {
+  margin-right: 4px;
+}
+.pagina-japao .forecast-container {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.pagina-japao .forecast-card {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 10px;
+  border: 1px solid rgba(188, 0, 45, 0.25);
+  border-top: 3px solid #bc002d;
+  border-radius: 14px;
+  background: rgba(255, 250, 252, 0.96);
+  box-shadow: 0 5px 15px rgba(70, 20, 30, 0.1);
+  text-align: center;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.pagina-japao .forecast-card::after {
+  content: "🌸";
+  position: absolute;
+  right: 7px;
+  bottom: 3px;
+  font-size: 18px;
+  opacity: 0.3;
+}
+.pagina-japao .forecast-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 9px 20px rgba(70, 20, 30, 0.16);
+}
+.pagina-japao .forecast-card h3 {
+  margin-bottom: 8px;
+  color: #bc002d;
+  font-size: 0.9rem;
+}
+.pagina-japao .forecast-card .icone-tempo img {
+  width: 48px;
+  height: 48px;
+}
+.pagina-japao .forecast-card .condicao-tempo {
+  margin: 6px 0 10px;
+  color: #555;
+  font-size: 0.8rem;
+}
+.pagina-japao .forecast-card p {
+  margin: 5px 0;
+  color: #3d3d3d;
+  font-size: 0.8rem;
+}
+.pagina-japao .forecast-card strong {
+  color: #8f0022;
+}
+.pagina-japao input {
+  border: 2px solid rgba(188, 0, 45, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 12px 15px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.pagina-japao input:focus {
+  border-color: #bc002d;
+  box-shadow: 0 0 0 3px rgba(188, 0, 45, 0.12);
+}
+.pagina-japao button {
+  border-radius: 12px;
+}
+.pagina-japao .favorite-button {
+  border: 2px solid #bc002d;
+  background: white;
+  color: #bc002d;
+  transition: 0.2s ease;
+}
+.pagina-japao .favorite-button:hover {
+  background: #bc002d;
+  color: white;
+}
+.pagina-japao .loading {
+  color: #bc002d;
+}
+.pagina-japao .error-message {
+  border-color: rgba(188, 0, 45, 0.35);
+  color: #8f0022;
+}
+@media (max-width: 1000px) {
+  .pagina-japao .forecast-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .pagina-japao > h1 {
+    font-size: 1.8rem;
+  }
+  .pagina-japao .forecast-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pagina-japao .weather-card {
+    padding: 18px;
+  }
+  .pagina-japao::before {
+    top: 80px;
+    right: 3%;
+    font-size: 50px;
+  }
+  .pagina-japao::after {
+    bottom: 25px;
+    left: 3%;
+    font-size: 22px;
+  }
+}
+@media (max-width: 500px) {
+  .pagina-japao > h1 {
+    font-size: 1.5rem;
+  }
+  .pagina-japao::before {
+    font-size: 40px;
+  }
+  .pagina-japao::after {
+    font-size: 18px;
+  }
+}

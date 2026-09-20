@@ -7,11 +7,11 @@ export default function WeatherCard({ cidade, clima }) {
       </div>
       <div className="weather-info">
         <p>
-          <strong>Umidade</strong>
+          <strong>Umidade:</strong>
           <span>{clima.current.relative_humidity_2m}%</span>
         </p>
         <p>
-          <strong>Vento</strong>
+          <strong>Vento:</strong>
           <span>
             {clima.current.wind_speed_10m} {clima.current_units.wind_speed_10m}
           </span>

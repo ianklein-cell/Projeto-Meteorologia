@@ -4,13 +4,17 @@ import "./CountryCard.css";
 export default function CountryCard({
   nome,
   codigoPais,
+  bandeira,
   descricao,
   rota,
+  imagem,
   imagemFundo,
 }) {
-  const estiloCard = imagemFundo
+  const imagemCard = imagemFundo || imagem;
+
+  const estiloCard = imagemCard
     ? {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url("${imagemFundo}")`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url("${imagemCard}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }
@@ -18,15 +22,21 @@ export default function CountryCard({
 
   return (
     <article
-      className={`countryCard ${imagemFundo ? "comImagem" : ""}`}
+      className={`countryCard ${imagemCard ? "comImagem" : ""}`}
       style={estiloCard}
     >
       <div className="countryCardHeader">
-        <img
-          src={`https://flagcdn.com/w80/${codigoPais.toLowerCase()}.png`}
-          alt={`Bandeira do ${nome}`}
-          className="countryFlagImg"
-        />
+        {codigoPais ? (
+          <img
+            src={`https://flagcdn.com/w80/${codigoPais.toLowerCase()}.png`}
+            alt={`Bandeira do ${nome}`}
+            className="countryFlagImg"
+          />
+        ) : (
+          <span className="countryFlag" aria-hidden="true">
+            {bandeira}
+          </span>
+        )}
         <h2>{nome}</h2>
       </div>
       <p>{descricao}</p>

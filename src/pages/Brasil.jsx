@@ -9,6 +9,9 @@ import FavoriteButton from "../components/FavoriteButton";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Brasil.css";
 
+const imagemFundoBrasil =
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dcf25b5f9397530889fb868bf3143ec391bbbd3d37763";
+
 export default function Brasil() {
   const [cidade, setCidade] = useState({
     nome: "Rio de Janeiro",
@@ -114,70 +117,72 @@ export default function Brasil() {
     : "dia";
 
   return (
-    <div className={`brasilContainer periodo${periodoDoDia}`}>
-      <div className="conteudoCentralizado">
-        <Link to="/" className="btnVoltar">
-          ← Voltar para Home
-        </Link>
-        <h1>Brasil 🇧🇷</h1>
+    <div
+      className={`paginaBrasil periodo-${periodoDoDia}`}
+      style={{
+        minHeight: "100vh",
+        width: "100%",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${imagemFundoBrasil}")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        padding: "20px",
+        boxSizing: "border-box",
+      }}
+    >
+      <Link to="/" className="btnVoltar">
+        ← Voltar para Home
+      </Link>
 
-        {/* Barra de pesquisa e botão de favorito lado a lado */}
-        <div className="secaoBusca">
-          <div className="cardElemento cardBusca">
-            <SearchBar
-              valor={pesquisa}
-              onChange={setPesquisa}
-              resultados={resultados}
-              onSelecionar={selecionarCidade}
-            />
-          </div>
-          <div className="cardElemento cardFavorito">
-            <FavoriteButton
-              cidade={cidade}
-              favorito={favoritoAtual}
-              onToggle={alternarFavorito}
-            />
-          </div>
-        </div>
+      <h1>
+        Meteorologia no Brasil{" "}
+        <img
+          src="https://flagcdn.com/w40/br.png"
+          alt="Bandeira do Brasil"
+          className="bandeiraHeader"
+        />
+      </h1>
 
-        {carregando ? (
-          <div className="cardElemento cardMensagem">
-            <p className="mensagemCarregando">Carregando meteorologia...</p>
-          </div>
-        ) : erro ? (
-          <div className="cardElemento cardMensagem">
-            <p className="mensagemErro">{erro}</p>
-          </div>
-        ) : clima && clima.current ? (
-          <div className="conteudoClima">
-            <div className="cardElemento cardClimaPrincipal">
-              <WeatherCard cidade={cidade.nome} clima={clima} />
-              <p className="textoFuso">
-                <strong>Fuso horário:</strong> {cidade.timezone}
-              </p>
-            </div>
-
-            {/* Previsão diária em cards individuais */}
-            <div className="secaoPrevisao">
-              <Forecast clima={clima} />
-            </div>
-
-            <div className="cardElemento cardLua">
-              <Moon
-                lat={cidade.latitude}
-                lon={cidade.longitude}
-                timezone={cidade.timezone}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="cardElemento cardMensagem">
-            <p className="mensagemAviso">
-              Não foi possível carregar os dados meteorológicos.
-            </p>
-          </div>
-        )}
+      <div className="secaoBusca">
+        <SearchBar
+          valor={pesquisa}
+          onChange={setPesquisa}
+          resultados={resultados}
+          onSelecionar={selecionarCidade}
+        />
+        <FavoriteButton
+          cidade={cidade}
+          favorito={favoritoAtual}
+          onToggle={alternarFavorito}
+        />
       </div>
+
+      {carregando ? (
+        <p className="loading">Carregando meteorologia...</p>
+      ) : erro ? (
+        <p className="errorMessage">{erro}</p>
+      ) : clima && clima.current ? (
+        <div className="conteudoClima">
+          <WeatherCard cidade={cidade.nome} clima={clima} />
+
+          <p className="textoFuso">
+            <strong>Fuso horário:</strong> {cidade.timezone}
+          </p>
+
+          <Forecast clima={clima} />
+
+          <Moon
+            lat={cidade.latitude}
+            lon={cidade.longitude}
+            timezone={cidade.timezone}
+          />
+        </div>
+      ) : (
+        <p className="mensagemAviso">
+          Não foi possível carregar os dados meteorológicos.
+        </p>
+      )}
     </div>
   );
 }

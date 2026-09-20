@@ -1,155 +1,292 @@
-.brasilContainer {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 15px;
-  box-sizing: border-box;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.65),
-      rgba(255, 255, 255, 0.65)
-    ),
-    url("https://static.vecteezy.com/ti/vetor-gratis/p1/3331360-mapa-brasil-silhueta-com-bandeira-sobre-fundo-branco-gratis-vetor.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+.paginaBrasil {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #0f172a;
 }
 
-.conteudoCentralizado {
-  width: 100%;
-  max-width: 720px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.btnVoltar {
-  align-self: flex-start;
+/* Botão de voltar */
+.paginaBrasil .btnVoltar {
   display: inline-block;
-  margin-bottom: 12px;
-  color: #1769aa;
-  font-weight: 600;
+  margin-bottom: 20px;
+  color: #047857;
+  font-weight: 700;
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: transform 0.2s ease;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.btnVoltar:hover {
+.paginaBrasil .btnVoltar:hover {
   transform: translateX(-4px);
+  color: #065f46;
 }
 
-.conteudoCentralizado h1 {
-  font-size: 1.8rem;
-  color: #172033;
-  margin-bottom: 16px;
-}
-
-.secaoBusca {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.cardBusca {
-  flex: 1;
-  margin-bottom: 0 !important;
-}
-
-.cardFavorito {
-  width: auto !important;
-  margin-bottom: 0 !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 14px !important;
-}
-
-.cardElemento {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  padding: 12px 16px;
-  box-sizing: border-box;
-  margin-bottom: 12px;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.cardElemento:hover {
-  background: rgba(255, 255, 255, 0.75);
-}
-
-.conteudoClima {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cardClimaPrincipal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.textoFuso {
-  font-size: 0.85rem;
-  color: #475569;
-  margin: 0;
-}
-
-.secaoPrevisao {
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.secaoPrevisao > div,
-.secaoPrevisao .forecastContainer,
-.secaoPrevisao .forecastList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-}
-
-.secaoPrevisao .forecastCard,
-.secaoPrevisao .forecastItem,
-.secaoPrevisao article {
-  flex: 1;
-  min-width: 110px;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  padding: 10px 8px;
+/* Título principal */
+.paginaBrasil > h1 {
+  margin-bottom: 25px;
+  color: #047857;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 2.2rem;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(4, 120, 87, 0.12);
 }
 
-.cardMensagem {
-  padding: 15px;
+.bandeiraHeader {
+  width: 32px;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 8px;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-.mensagemCarregando,
-.mensagemAviso {
-  font-size: 1rem;
+/* Container de Busca e Botão alinhados perfeitamente ao centro */
+.paginaBrasil .secaoBusca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+}
+
+.paginaBrasil .secaoBusca > :first-child {
+  flex: 1;
+  display: flex;
+}
+
+/* Input de busca com altura de 48px */
+.paginaBrasil input {
+  width: 100%;
+  height: 48px;
+  border: 1.5px solid rgba(4, 120, 87, 0.3);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  padding: 0 16px;
+  outline: none;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paginaBrasil input:focus {
+  border-color: #047857;
+  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
+}
+
+/* Botão Favoritos alinhado */
+.paginaBrasil .favoriteButton,
+.paginaBrasil .favorite-button,
+.paginaBrasil .secaoBusca button {
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #047857;
+  background: #ffffff;
+  color: #047857;
+  border-radius: 14px;
+  padding: 0 20px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.paginaBrasil .favoriteButton:hover,
+.paginaBrasil .favorite-button:hover,
+.paginaBrasil .secaoBusca button:hover {
+  background: #047857;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(4, 120, 87, 0.2);
+}
+
+/* Container de Clima */
+.paginaBrasil .conteudoClima {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Card Principal */
+.paginaBrasil .weatherCard,
+.paginaBrasil .weather-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 32px rgba(4, 120, 87, 0.08);
+  padding: 28px;
+}
+
+.paginaBrasil .weatherCard::before,
+.paginaBrasil .weather-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #047857 0%, #10b981 50%, #f59e0b 100%);
+}
+
+.paginaBrasil .weatherCard h2,
+.paginaBrasil .weather-card h2 {
+  color: #047857;
+  border-bottom: 1.5px solid rgba(4, 120, 87, 0.15);
+  padding-bottom: 12px;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.paginaBrasil .weatherTemperatura,
+.paginaBrasil .weather-temperatura {
+  color: #047857;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.paginaBrasil .weatherInfo p,
+.paginaBrasil .weather-info p {
+  background: rgba(240, 253, 244, 0.8);
+  border: 1px solid rgba(4, 120, 87, 0.15);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+/* Previsão do tempo (Cards dos dias) */
+.paginaBrasil .forecastContainer,
+.paginaBrasil .forecast-container {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.paginaBrasil .forecastCard,
+.paginaBrasil .forecast-card {
+  position: relative;
+  overflow: hidden;
+  padding: 16px 6px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(4, 120, 87, 0.05);
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.paginaBrasil .forecastCard::before,
+.paginaBrasil .forecast-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: linear-gradient(90deg, #047857, #10b981);
+  border-radius: 0 0 4px 4px;
+  opacity: 0.8;
+}
+
+.paginaBrasil .forecastCard:hover,
+.paginaBrasil .forecast-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 24px rgba(4, 120, 87, 0.12);
+}
+
+.paginaBrasil .forecastCard h3,
+.paginaBrasil .forecast-card h3 {
+  margin-bottom: 8px;
+  color: #047857;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+/* Quebra de linha permitida para descrições longas como "Pancadas de chuva" */
+.paginaBrasil .forecastCard p,
+.paginaBrasil .forecast-card p {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Impedimento de quebra de linha em valores e temperaturas com °C */
+.paginaBrasil .forecastCard strong,
+.paginaBrasil .forecast-card strong,
+.paginaBrasil .forecastCard span,
+.paginaBrasil .forecast-card span {
+  white-space: nowrap;
+}
+
+.paginaBrasil .forecastCard strong,
+.paginaBrasil .forecast-card strong {
+  color: #065f46;
+}
+
+.paginaBrasil .textoFuso {
+  font-size: 0.9rem;
   color: #475569;
-  margin: 0;
+  margin: 2px 0;
+  text-align: center;
 }
 
-.mensagemErro {
-  font-size: 1rem;
-  color: #d32f2f;
-  margin: 0;
+.paginaBrasil .loading {
+  color: #047857;
+  font-weight: 600;
+  text-align: center;
+}
+
+.paginaBrasil .errorMessage,
+.paginaBrasil .error-message {
+  color: #dc2626;
+  text-align: center;
+  padding: 12px;
+  background: #fef2f2;
+  border-radius: 12px;
+  border: 1px solid #fecaca;
+}
+
+.paginaBrasil .mensagemAviso {
+  color: #475569;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 1000px) {
+  .paginaBrasil .forecastContainer,
+  .paginaBrasil .forecast-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .paginaBrasil > h1 {
+    font-size: 1.8rem;
+  }
+  .paginaBrasil .secaoBusca {
+    max-width: 100%;
+  }
+  .paginaBrasil .forecastContainer,
+  .paginaBrasil .forecast-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
