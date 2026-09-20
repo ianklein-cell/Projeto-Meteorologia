@@ -138,7 +138,14 @@ export default function EUA() {
       }}
     >
       <Link to="/">← Voltar para Home</Link>
-      <h1>Estados Unidos 🇺🇸</h1>
+      <h1>
+  Meteorologia no Estados Unidos{" "}
+  <img
+    src="https://flagcdn.com/w40/us.png"
+    alt="Bandeira dos Estados Unidos"
+    className="bandeiraHeader"
+  />
+</h1>
       <SearchBar
         valor={pesquisa}
         onChange={setPesquisa}

@@ -14,7 +14,7 @@ export default function CountryCard({
 
   const estiloCard = imagemCard
     ? {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url("${imagem}")`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url("${imagemCard}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }
@@ -22,7 +22,7 @@ export default function CountryCard({
 
   return (
     <article
-      className={`countryCard ${imagem ? "comImagem" : ""}`}
+      className={`countryCard ${imagemCard ? "comImagem" : ""}`}
       style={estiloCard}
     >
       <div className="countryCardHeader">

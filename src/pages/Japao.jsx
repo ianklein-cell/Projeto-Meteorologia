@@ -28,7 +28,6 @@ export default function Japao() {
   const [erro, setErro] = useState("");
   const [pesquisa, setPesquisa] = useState("");
   const [resultados, setResultados] = useState([]);
-
   const [favoritos, setFavoritos] = useState(() => {
     const salvos = localStorage.getItem("favoritos");
 
@@ -148,7 +147,14 @@ export default function Japao() {
     >
       <Link to="/">← Voltar para Home</Link>
 
-      <h1>Meteorologia no Japão 🇯🇵</h1>
+      <h1>
+  Meteorologia no Japão{" "}
+  <img
+    src="https://flagcdn.com/w40/jp.png"
+    alt="Bandeira do Japão"
+    className="bandeiraHeader"
+  />
+</h1>
 
       <SearchBar
         valor={pesquisa}

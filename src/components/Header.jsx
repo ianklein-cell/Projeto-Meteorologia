@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Header.css";
 
 export default function Header() {
@@ -7,18 +7,18 @@ export default function Header() {
       <div className="conteudoCabecalho">
         <h1>Clima Nexus</h1>
         <nav className="navegacao">
-          <Link className="linkNavegacao" to="/brasil">
+          <NavLink className="linkNavegacao" to="/brasil">
             Brasil
-          </Link>
-          <Link className="linkNavegacao" to="/japao">
+          </NavLink>
+          <NavLink className="linkNavegacao" to="/japao">
             Japão
-          </Link>
-          <Link className="linkNavegacao" to="/eua">
+          </NavLink>
+          <NavLink className="linkNavegacao" to="/eua">
             EUA
-          </Link>
-          <Link className="linkNavegacao" to="/favoritos">
+          </NavLink>
+          <NavLink className="linkNavegacao" to="/favoritos">
             Favoritos
-          </Link>
+          </NavLink>
         </nav>
       </div>
     </header>
