@@ -10,9 +10,9 @@ export default function CountryCard({
   imagem,
   imagemFundo,
 }) {
-  const imagem = imagemFundo || imagem;
+  const imagemCard = imagemFundo || imagem;
 
-  const estiloCard = imagem
+  const estiloCard = imagemCard
     ? {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url("${imagem}")`,
         backgroundSize: "cover",

@@ -8,6 +8,7 @@ import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Brasil.css";
+const IMAGEM_FUNDO = "/FundoBrasilCard.webp";
 
 export default function Brasil() {
   const [cidade, setCidade] = useState({
@@ -59,7 +60,7 @@ export default function Brasil() {
         const dadosClima = await BuscarClima(
           cidade.latitude,
           cidade.longitude,
-          cidade.timezone
+          cidade.timezone,
         );
         setClima(dadosClima);
       } catch (error) {
@@ -81,7 +82,7 @@ export default function Brasil() {
     const jaFavoritado = favoritos.some(
       (favorito) =>
         favorito.nome === cidade.nome &&
-        favorito.codigoPais === cidade.codigoPais
+        favorito.codigoPais === cidade.codigoPais,
     );
     let novosFavoritos;
     if (jaFavoritado) {
@@ -90,7 +91,7 @@ export default function Brasil() {
           !(
             favorito.nome === cidade.nome &&
             favorito.codigoPais === cidade.codigoPais
-          )
+          ),
       );
     } else {
       novosFavoritos = [...favoritos, cidade];
@@ -102,19 +103,22 @@ export default function Brasil() {
   const favoritoAtual = favoritos.some(
     (favorito) =>
       favorito.nome === cidade.nome &&
-      favorito.codigoPais === cidade.codigoPais
+      favorito.codigoPais === cidade.codigoPais,
   );
 
   const periodoDoDia = clima?.current?.time
     ? identificarPeriodoDoDia(
         clima.current.time,
         clima.daily.sunrise[0],
-        clima.daily.sunset[0]
+        clima.daily.sunset[0],
       )
     : "dia";
 
   return (
-    <div className={`brasilContainer periodo${periodoDoDia}`}>
+    <div
+      className={`brasilContainer periodo${periodoDoDia}`}
+      style={{ "--imagem-fundo": `url("${IMAGEM_FUNDO}")` }}
+    >
       <div className="conteudoCentralizado">
         <Link to="/" className="btnVoltar">
           ← Voltar para Home

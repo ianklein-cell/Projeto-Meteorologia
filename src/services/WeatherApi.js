@@ -28,6 +28,7 @@ export async function BuscarCidades(nome, codigoPais) {
     timezone: cidade.timezone,
   }));
 }
+
 export async function BuscarCidade(nome, codigoPais) {
   const cidades = await BuscarCidades(nome, codigoPais);
 
@@ -36,13 +37,15 @@ export async function BuscarCidade(nome, codigoPais) {
   }
   return cidades[0];
 }
+
 export async function BuscarClima(latitude, longitude, timezone = "auto") {
   const params = new URLSearchParams({
     latitude,
     longitude,
     timezone,
+    // uv_index e snowfall adicionados aqui no parâmetro current:
     current:
-      "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m",
+      "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,uv_index,snowfall",
     daily:
       "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset",
     forecast_days: 7,

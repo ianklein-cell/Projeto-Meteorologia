@@ -2,9 +2,6 @@ import Header from "../components/Header";
 import CountryCard from "../components/CountryCard";
 import "./Home.css";
 
-const IMAGEM_BRASIL =
-  "https://bondinhowebsitestgprd.blob.core.windows.net/bondinho-website-str-container-prd//image_80_c3e3947c99.png";
-
 export default function Home() {
   return (
     <>
@@ -20,14 +17,14 @@ export default function Home() {
             codigoPais="br"
             descricao="Consulte a previsão do tempo no Brasil."
             rota="/brasil"
-            imagemFundo={IMAGEM_BRASIL}
+            imagem="/CardBrasil.webp"
           />
           <CountryCard
             nome="Japão"
             codigoPais="jp"
             descricao="Consulte a previsão do tempo no Japão."
             rota="/japao"
-            imagem="https://www.umviajante.com.br/wp-content/uploads/2025/09/passeio-monte-fuji-japao-guia-20.jpg"
+            imagem="/FundoCardJapao.webP"
           />
           <CountryCard
             nome="Estados Unidos"
