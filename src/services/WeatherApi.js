@@ -43,7 +43,6 @@ export async function BuscarClima(latitude, longitude, timezone = "auto") {
     latitude,
     longitude,
     timezone,
-    // uv_index e snowfall adicionados aqui no parâmetro current:
     current:
       "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,uv_index,snowfall",
     daily:

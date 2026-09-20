@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import Header from "../components/Header";
-import CountryCard from "../components/CountryCard";
-import "./Home.css";
-=======
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
@@ -138,39 +133,8 @@ export default function Brasil() {
         clima.daily.sunset[0]
       )
     : "dia";
->>>>>>> 454688c (Mesclando alterações da dupla)
 
-export default function Home() {
   return (
-<<<<<<< HEAD
-    <>
-      <Header />
-      <main className="homeContainer">
-        <section className="homeHero">
-          <h1>Previsão do Tempo ☂️</h1>
-          <p>Consulte a meteorologia dos países abaixo:</p>
-        </section>
-        <div className="countriesContainer">
-          <CountryCard
-            nome="Brasil"
-            codigoPais="br"
-            descricao="Consulte a previsão do tempo no Brasil."
-            rota="/brasil"
-            imagem="/CardBrasil.webp"
-          />
-          <CountryCard
-            nome="Japão"
-            codigoPais="jp"
-            descricao="Consulte a previsão do tempo no Japão."
-            rota="/japao"
-            imagem="/FundoCardJapao.webP"
-          />
-          <CountryCard
-            nome="Estados Unidos"
-            codigoPais="us"
-            descricao="Consulte a previsão do tempo nos Estados Unidos."
-            rota="/eua"
-=======
     <div
       className={`paginaBrasil periodo-${periodoDoDia}`}
       style={{
@@ -234,10 +198,13 @@ export default function Home() {
             lat={cidade.latitude}
             lon={cidade.longitude}
             timezone={cidade.timezone}
->>>>>>> 454688c (Mesclando alterações da dupla)
           />
         </div>
-      </main>
-    </>
+      ) : (
+        <p className="mensagemAviso">
+          Não foi possível carregar os dados meteorológicos.
+        </p>
+      )}
+    </div>
   );
 }

@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-export default function WeatherCard({ cidade, clima }) {
-  if (!clima || !clima.current) return null;
-=======
 export default function WeatherCard({ cidade, clima, codigoPais }) {
   const eBrasil = codigoPais === "BR";
 
   const uvIndex =
     clima?.current?.uv_index ?? clima?.daily?.uv_index_max?.[0];
->>>>>>> 454688c (Mesclando alterações da dupla)
 
   return (
     <section className="weather-card">
@@ -27,20 +22,6 @@ export default function WeatherCard({ cidade, clima, codigoPais }) {
             {clima?.current_units?.wind_speed_10m}
           </span>
         </p>
-<<<<<<< HEAD
-        <p>
-          <strong>Índice UV:</strong>
-          <span>{clima.current.uv_index ?? "N/A"}</span>
-        </p>
-        <p>
-          <strong>Queda de Neve:</strong>
-          <span>
-            {clima.current.snowfall > 0
-              ? `${clima.current.snowfall} ${clima.current_units?.snowfall || "cm"}`
-              : "Sem neve"}
-          </span>
-        </p>
-=======
         {uvIndex !== undefined && (
           <p>
             <strong>Índice UV:</strong>
@@ -57,7 +38,6 @@ export default function WeatherCard({ cidade, clima, codigoPais }) {
             </span>
           </p>
         )}
->>>>>>> 454688c (Mesclando alterações da dupla)
       </div>
     </section>
   );

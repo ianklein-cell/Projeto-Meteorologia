@@ -17,23 +17,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-/* Correção de sobreposição global entre Alerta, Cards e Lua */
-
-.alert-card,
-div:has(> .alert-card) {
-  position: relative !important;
-  margin-top: 15px !important;
-  margin-bottom: 30px !important;
-  z-index: 10;
-  clear: both;
-}
-
-.moon-card,
-.moon-container,
-div:has(> .moon-card) {
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  margin-top: 25px !important;
-  clear: both;
-}

@@ -10,7 +10,8 @@ import AlertCard from "../components/AlertCard";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Japao.css";
 
-const IMAGEM_FUNDO = "/Japao.webp";
+const IMAGEM_FUNDO =
+  "https://media.istockphoto.com/id/2189197752/pt/vetorial/japan-the-country-silhouette-on-the-national-flag.jpg?s=612x612&w=0&k=20&c=DxwwAPbJNocH-nHDXuszDb8vZtxjhr0cJg38sQ15rS8=";
 
 export default function Japao() {
   const [cidade, setCidade] = useState({
@@ -135,10 +136,10 @@ export default function Japao() {
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url("${IMAGEM_FUNDO}")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        "--imagem-fundo": `url("${IMAGEM_FUNDO}")`,
+        backgroundSize: "100% 100%, 1000px",
+        backgroundPosition: "center, center",
+        backgroundRepeat: "no-repeat, no-repeat",
         backgroundAttachment: "fixed",
         padding: "20px",
         boxSizing: "border-box",

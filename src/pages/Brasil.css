@@ -1,27 +1,8 @@
-/* Container Principal */
-.brasilContainer {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 15px;
-  box-sizing: border-box;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)),
-    var(--imagem-fundo);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
 .paginaBrasil {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   color: #0f172a;
-  width: 100%;
 }
 
 /* Botão de voltar */
@@ -32,9 +13,7 @@
   font-weight: 700;
   text-decoration: none;
   font-size: 0.95rem;
-  transition:
-    transform 0.2s ease,
-    color 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .paginaBrasil .btnVoltar:hover {
@@ -43,8 +22,7 @@
 }
 
 /* Título principal */
-.paginaBrasil > h1,
-.conteudoCentralizado h1 {
+.paginaBrasil > h1 {
   margin-bottom: 25px;
   color: #047857;
   text-align: center;
@@ -62,9 +40,8 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-/* Container de Busca e Botão alinhados ao centro */
-.paginaBrasil .secaoBusca,
-.secaoBusca {
+/* Container de Busca e Botão alinhados perfeitamente ao centro */
+.paginaBrasil .secaoBusca {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +56,7 @@
   display: flex;
 }
 
-/* Input de busca */
+/* Input de busca com altura de 48px */
 .paginaBrasil input {
   width: 100%;
   height: 48px;
@@ -93,9 +70,7 @@
   box-sizing: border-box;
   margin: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .paginaBrasil input:focus {
@@ -103,11 +78,10 @@
   box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
 }
 
-/* Botão Favoritos */
+/* Botão Favoritos alinhado */
 .paginaBrasil .favoriteButton,
 .paginaBrasil .favorite-button,
-.paginaBrasil .secaoBusca button,
-.cardFavorito {
+.paginaBrasil .secaoBusca button {
   height: 48px;
   display: inline-flex;
   align-items: center;
@@ -128,8 +102,7 @@
 
 .paginaBrasil .favoriteButton:hover,
 .paginaBrasil .favorite-button:hover,
-.paginaBrasil .secaoBusca button:hover,
-.cardFavorito:hover {
+.paginaBrasil .secaoBusca button:hover {
   background: #047857;
   color: #ffffff;
   transform: translateY(-1px);
@@ -137,8 +110,7 @@
 }
 
 /* Container de Clima */
-.paginaBrasil .conteudoClima,
-.conteudoClima {
+.paginaBrasil .conteudoClima {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -198,12 +170,10 @@
 
 /* Previsão do tempo (Cards dos dias) */
 .paginaBrasil .forecastContainer,
-.paginaBrasil .forecast-container,
-.secaoPrevisao > div {
+.paginaBrasil .forecast-container {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 10px;
-  width: 100%;
 }
 
 .paginaBrasil .forecastCard,
@@ -249,6 +219,7 @@
   white-space: nowrap;
 }
 
+/* Quebra de linha permitida para descrições longas como "Pancadas de chuva" */
 .paginaBrasil .forecastCard p,
 .paginaBrasil .forecast-card p {
   margin: 4px 0;
@@ -258,6 +229,7 @@
   word-break: break-word;
 }
 
+/* Impedimento de quebra de linha em valores e temperaturas com °C */
 .paginaBrasil .forecastCard strong,
 .paginaBrasil .forecast-card strong,
 .paginaBrasil .forecastCard span,
@@ -270,8 +242,7 @@
   color: #065f46;
 }
 
-.paginaBrasil .textoFuso,
-.textoFuso {
+.paginaBrasil .textoFuso {
   font-size: 0.9rem;
   color: #475569;
   margin: 2px 0;
@@ -285,8 +256,7 @@
 }
 
 .paginaBrasil .errorMessage,
-.paginaBrasil .error-message,
-.mensagemErro {
+.paginaBrasil .error-message {
   color: #dc2626;
   text-align: center;
   padding: 12px;
@@ -303,24 +273,20 @@
 /* Responsividade */
 @media (max-width: 1000px) {
   .paginaBrasil .forecastContainer,
-  .paginaBrasil .forecast-container,
-  .secaoPrevisao > div {
+  .paginaBrasil .forecast-container {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .paginaBrasil > h1,
-  .conteudoCentralizado h1 {
+  .paginaBrasil > h1 {
     font-size: 1.8rem;
   }
-  .paginaBrasil .secaoBusca,
-  .secaoBusca {
+  .paginaBrasil .secaoBusca {
     max-width: 100%;
   }
   .paginaBrasil .forecastContainer,
-  .paginaBrasil .forecast-container,
-  .secaoPrevisao > div {
+  .paginaBrasil .forecast-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
