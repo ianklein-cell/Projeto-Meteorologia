@@ -7,7 +7,6 @@ export default function AlertCard({ tipo, lat, lon }) {
   const [indiceSelecionado, setIndiceSelecionado] = useState(0);
   const [carregando, setCarregando] = useState(true);
   const [aberto, setAberto] = useState(false);
-  const [foiVisualizado, setFoiVisualizado] = useState(false);
 
   useEffect(() => {
     async function buscarAlertas() {
@@ -18,8 +17,10 @@ export default function AlertCard({ tipo, lat, lon }) {
           const resposta = await fetch(
             `https://api.weather.gov/alerts/active?point=${lat},${lon}`,
           );
+
           const dados = await resposta.json();
           const avisos = dados.features || [];
+
           const avisoTornado = avisos.find(
             (item) =>
               item.properties.event.toLowerCase().includes("tornado") ||
@@ -28,9 +29,11 @@ export default function AlertCard({ tipo, lat, lon }) {
 
           if (avisoTornado) {
             const idAlerta = avisoTornado.id;
+
             const alertasVistos = JSON.parse(
-              localStorage.getItem("alertasVistos") || "[]",
+              sessionStorage.getItem("alertasVistos") || "[]",
             );
+
             const jaVisto = alertasVistos.includes(idAlerta);
 
             setAlerta({
@@ -42,14 +45,10 @@ export default function AlertCard({ tipo, lat, lon }) {
               severidade: "Alta",
             });
 
-            setFoiVisualizado(jaVisto);
-
+            // O alerta só abre automaticamente se ainda não foi fechado
+            // pelo usuário durante esta sessão.
             if (!jaVisto) {
               setAberto(true);
-              localStorage.setItem(
-                "alertasVistos",
-                JSON.stringify([...alertasVistos, idAlerta]),
-              );
             }
           } else {
             setAlerta({
@@ -63,6 +62,7 @@ export default function AlertCard({ tipo, lat, lon }) {
           const resposta = await fetch(
             `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=${lat}&longitude=${lon}&maxradiuskm=500&minmagnitude=3.5&limit=10`,
           );
+
           const dados = await resposta.json();
           const terremotos = dados.features || [];
 
@@ -72,20 +72,19 @@ export default function AlertCard({ tipo, lat, lon }) {
           if (terremotos.length > 0) {
             const primeiroTerremoto = terremotos[0];
             const idTerremoto = primeiroTerremoto.id;
+
             const alertasVistos = JSON.parse(
-              localStorage.getItem("alertasVistos") || "[]",
+              sessionStorage.getItem("alertasVistos") || "[]",
             );
+
             const jaVisto = alertasVistos.includes(idTerremoto);
 
             atualizarDetalhesTerremoto(primeiroTerremoto);
-            setFoiVisualizado(jaVisto);
 
+            // O alerta abre automaticamente apenas se o usuário
+            // ainda não o fechou durante esta sessão.
             if (!jaVisto) {
               setAberto(true);
-              localStorage.setItem(
-                "alertasVistos",
-                JSON.stringify([...alertasVistos, idTerremoto]),
-              );
             }
           } else {
             setAlerta({
@@ -116,6 +115,7 @@ export default function AlertCard({ tipo, lat, lon }) {
     const magnitude = itemTerremoto.properties.mag;
     const local = itemTerremoto.properties.place;
     const profundidade = itemTerremoto.geometry.coordinates[2];
+
     const dataHora = new Date(itemTerremoto.properties.time).toLocaleString(
       "pt-BR",
     );
@@ -140,18 +140,22 @@ export default function AlertCard({ tipo, lat, lon }) {
     const novoIndice = Number(evento.target.value);
     const terremoto = listaTerremotos[novoIndice];
     const idTerremoto = terremoto.id;
+
     const alertasVistos = JSON.parse(
-      localStorage.getItem("alertasVistos") || "[]",
+      sessionStorage.getItem("alertasVistos") || "[]",
     );
+
     const jaVisto = alertasVistos.includes(idTerremoto);
 
     setIndiceSelecionado(novoIndice);
     atualizarDetalhesTerremoto(terremoto);
-    setFoiVisualizado(jaVisto);
+
+    // Ao escolher manualmente outro terremoto,
+    // o alerta sempre abre.
     setAberto(true);
 
     if (!jaVisto) {
-      localStorage.setItem(
+      sessionStorage.setItem(
         "alertasVistos",
         JSON.stringify([...alertasVistos, idTerremoto]),
       );
@@ -160,7 +164,19 @@ export default function AlertCard({ tipo, lat, lon }) {
 
   function fecharAlerta() {
     setAberto(false);
-    setFoiVisualizado(true);
+
+    if (alerta?.id) {
+      const alertasVistos = JSON.parse(
+        sessionStorage.getItem("alertasVistos") || "[]",
+      );
+
+      if (!alertasVistos.includes(alerta.id)) {
+        sessionStorage.setItem(
+          "alertasVistos",
+          JSON.stringify([...alertasVistos, alerta.id]),
+        );
+      }
+    }
   }
 
   function reabrirAlerta() {
@@ -212,8 +228,10 @@ export default function AlertCard({ tipo, lat, lon }) {
 
             <div className="alertaCabecalho">
               <span className="alertaIcone">{icone}</span>
+
               <div>
                 <span className="alertaEtiqueta">ALERTA</span>
+
                 <h2>{alerta?.titulo || "Alerta em tempo real"}</h2>
               </div>
             </div>
@@ -223,6 +241,7 @@ export default function AlertCard({ tipo, lat, lon }) {
                 <label htmlFor="selectTerremoto">
                   <strong>🪨 Escolher evento recente</strong>
                 </label>
+
                 <select
                   id="selectTerremoto"
                   value={indiceSelecionado}
@@ -243,14 +262,17 @@ export default function AlertCard({ tipo, lat, lon }) {
                   <strong>🪨 Local:</strong>
                   <span>{alerta.local}</span>
                 </p>
+
                 <p>
                   <strong>Profundidade:</strong>
                   <span>{alerta.profundidade}</span>
                 </p>
+
                 <p>
                   <strong>Data e Hora:</strong>
                   <span>{alerta.dataHora}</span>
                 </p>
+
                 <p>
                   <strong>🌊 Alerta de Tsunami:</strong>
                   <span>{alerta.statusTsunami}</span>
