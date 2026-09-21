@@ -1,6 +1,6 @@
 export default function ErrorMessage({ mensagem }) {
   return (
-    <div className="error-message">
+    <div className="errorMessage">
       <p>{mensagem}</p>
     </div>
   );

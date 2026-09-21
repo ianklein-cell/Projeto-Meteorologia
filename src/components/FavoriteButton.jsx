@@ -1,7 +1,7 @@
 export default function FavoriteButton({ cidade, favorito, onToggle }) {
   return (
     <button
-      className="favorite-button"
+      className="favoriteButton"
       onClick={onToggle}
       type="button"
       aria-label={

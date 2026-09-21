@@ -62,7 +62,6 @@
   font-size: 14px;
 }
 
-
 .fasesLuaBotoes {
   display: flex;
   align-items: center;
@@ -146,12 +145,10 @@
   stroke-width: 2 !important;
 }
 
-
 .sistemaLua .continente {
   fill: #22c55e !important;
   stroke: none !important;
 }
-
 
 .sistemaLua text {
   font-family: Arial, Helvetica, sans-serif;
@@ -161,7 +158,6 @@
   font-weight: bold;
 }
 
-
 .luaSvg {
   transition: transform 0.55s ease;
 }
@@ -169,7 +165,6 @@
 .luaSvg circle {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
 }
-
 
 .controleFases {
   display: flex;
@@ -208,7 +203,6 @@
 .controleFases > button:hover {
   transform: scale(1.08);
 }
-
 
 .indicadoresFases {
   display: flex;
@@ -255,7 +249,6 @@
   transform: scale(1.15);
 }
 
-
 .informacaoFase {
   margin-top: 15px;
   padding: 20px;
@@ -269,7 +262,6 @@
 
   transition: 0.3s ease;
 }
-
 
 .faseTitulo {
   display: flex;
@@ -299,7 +291,6 @@
   color: #475569;
 }
 
-
 .informacaoFase > p {
   margin: 14px 0;
 
@@ -308,7 +299,6 @@
   font-size: 15px;
   line-height: 1.55;
 }
-
 
 .dadosLua {
   display: grid;
@@ -376,8 +366,7 @@
   margin: 0;
 }
 
-
-.fases-br {
+.fasesBR {
   border-color: #047857;
 
   background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
@@ -385,15 +374,15 @@
   box-shadow: 0 8px 25px rgba(4, 120, 87, 0.18);
 }
 
-.fases-br::before {
+.fasesBR::before {
   background: linear-gradient(90deg, #047857 0%, #10b981 45%, #f59e0b 100%);
 }
 
-.fases-br .fasesLuaCabecalho h2 {
+.fasesBR .fasesLuaCabecalho h2 {
   color: #047857;
 }
 
-.fases-br .sistemaLua {
+.fasesBR .sistemaLua {
   border-color: rgba(4, 120, 87, 0.55);
 
   box-shadow:
@@ -401,47 +390,46 @@
     0 5px 18px rgba(4, 120, 87, 0.12);
 }
 
-.fases-br .fasesLuaBotoes button,
-.fases-br .controleFases > button {
+.fasesBR .fasesLuaBotoes button,
+.fasesBR .controleFases > button {
   background: #047857;
   color: white;
 }
 
-.fases-br .fasesLuaBotoes button:hover,
-.fases-br .controleFases > button:hover {
+.fasesBR .fasesLuaBotoes button:hover,
+.fasesBR .controleFases > button:hover {
   background: #059669;
 }
 
-.fases-br .indicadoresFases {
+.fasesBR .indicadoresFases {
   border-color: #047857;
   background: rgba(4, 120, 87, 0.08);
 }
 
-.fases-br .indicadoresFases button:hover {
+.fasesBR .indicadoresFases button:hover {
   background: #d1fae5;
 }
 
-.fases-br .indicadoresFases button.faseSelecionada {
+.fasesBR .indicadoresFases button.faseSelecionada {
   background: #d1fae5;
   border-color: #047857;
 }
 
-.fases-br .informacaoFase {
+.fasesBR .informacaoFase {
   border-color: #047857;
   border-left-color: #047857;
 }
 
-.fases-br .faseTitulo h3,
-.fases-br .faseTitulo strong {
+.fasesBR .faseTitulo h3,
+.fasesBR .faseTitulo strong {
   color: #047857;
 }
 
-.fases-br .fasesLuaIndicador {
+.fasesBR .fasesLuaIndicador {
   color: #047857;
 }
 
-
-.fases-jp {
+.fasesJP {
   border-color: #bc002d;
 
   background: linear-gradient(180deg, #ffffff 0%, #fff4f6 100%);
@@ -449,15 +437,15 @@
   box-shadow: 0 8px 25px rgba(188, 0, 45, 0.18);
 }
 
-.fases-jp::before {
+.fasesJP::before {
   background: linear-gradient(90deg, #bc002d 0%, #ffffff 50%, #bc002d 100%);
 }
 
-.fases-jp .fasesLuaCabecalho h2 {
+.fasesJP .fasesLuaCabecalho h2 {
   color: #bc002d;
 }
 
-.fases-jp .sistemaLua {
+.fasesJP .sistemaLua {
   border-color: rgba(188, 0, 45, 0.55);
 
   box-shadow:
@@ -465,47 +453,46 @@
     0 5px 18px rgba(188, 0, 45, 0.12);
 }
 
-.fases-jp .fasesLuaBotoes button,
-.fases-jp .controleFases > button {
+.fasesJP .fasesLuaBotoes button,
+.fasesJP .controleFases > button {
   background: #bc002d;
   color: white;
 }
 
-.fases-jp .fasesLuaBotoes button:hover,
-.fases-jp .controleFases > button:hover {
+.fasesJP .fasesLuaBotoes button:hover,
+.fasesJP .controleFases > button:hover {
   background: #d9043d;
 }
 
-.fases-jp .indicadoresFases {
+.fasesJP .indicadoresFases {
   border-color: #bc002d;
   background: rgba(188, 0, 45, 0.07);
 }
 
-.fases-jp .indicadoresFases button:hover {
+.fasesJP .indicadoresFases button:hover {
   background: #ffe4e9;
 }
 
-.fases-jp .indicadoresFases button.faseSelecionada {
+.fasesJP .indicadoresFases button.faseSelecionada {
   background: #ffe4e9;
   border-color: #bc002d;
 }
 
-.fases-jp .informacaoFase {
+.fasesJP .informacaoFase {
   border-color: #bc002d;
   border-left-color: #bc002d;
 }
 
-.fases-jp .faseTitulo h3,
-.fases-jp .faseTitulo strong {
+.fasesJP .faseTitulo h3,
+.fasesJP .faseTitulo strong {
   color: #bc002d;
 }
 
-.fases-jp .fasesLuaIndicador {
+.fasesJP .fasesLuaIndicador {
   color: #bc002d;
 }
 
-
-.fases-us {
+.fasesUS {
   border-color: #1e3a8a;
 
   background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
@@ -513,15 +500,15 @@
   box-shadow: 0 8px 25px rgba(30, 58, 138, 0.18);
 }
 
-.fases-us::before {
+.fasesUS::before {
   background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 45%, #b91c1c 100%);
 }
 
-.fases-us .fasesLuaCabecalho h2 {
+.fasesUS .fasesLuaCabecalho h2 {
   color: #1e3a8a;
 }
 
-.fases-us .sistemaLua {
+.fasesUS .sistemaLua {
   border-color: rgba(30, 58, 138, 0.55);
 
   box-shadow:
@@ -529,42 +516,42 @@
     0 5px 18px rgba(30, 58, 138, 0.12);
 }
 
-.fases-us .fasesLuaBotoes button,
-.fases-us .controleFases > button {
+.fasesUS .fasesLuaBotoes button,
+.fasesUS .controleFases > button {
   background: #1e3a8a;
   color: white;
 }
 
-.fases-us .fasesLuaBotoes button:hover,
-.fases-us .controleFases > button:hover {
+.fasesUS .fasesLuaBotoes button:hover,
+.fasesUS .controleFases > button:hover {
   background: #2563eb;
 }
 
-.fases-us .indicadoresFases {
+.fasesUS .indicadoresFases {
   border-color: #1e3a8a;
   background: rgba(30, 58, 138, 0.07);
 }
 
-.fases-us .indicadoresFases button:hover {
+.fasesUS .indicadoresFases button:hover {
   background: #dbeafe;
 }
 
-.fases-us .indicadoresFases button.faseSelecionada {
+.fasesUS .indicadoresFases button.faseSelecionada {
   background: #dbeafe;
   border-color: #1e3a8a;
 }
 
-.fases-us .informacaoFase {
+.fasesUS .informacaoFase {
   border-color: #1e3a8a;
   border-left-color: #1e3a8a;
 }
 
-.fases-us .faseTitulo h3,
-.fases-us .faseTitulo strong {
+.fasesUS .faseTitulo h3,
+.fasesUS .faseTitulo strong {
   color: #1e3a8a;
 }
 
-.fases-us .fasesLuaIndicador {
+.fasesUS .fasesLuaIndicador {
   color: #1e3a8a;
 }
 

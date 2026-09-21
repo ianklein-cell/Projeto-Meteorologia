@@ -80,7 +80,7 @@ export default function ForecastGraph({
   }
 
   return (
-    <section className={`graficoPrevisao grafico-${codigoPais?.toLowerCase()}`}>
+    <section className={`graficoPrevisao grafico${codigoPais ? codigoPais.toUpperCase() : ""}`}>
       <div className="graficoCabecalho">
         <h2>
           Previsão hora a hora

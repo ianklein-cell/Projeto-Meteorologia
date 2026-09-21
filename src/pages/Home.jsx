@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import CountryCard from "../components/CountryCard";
 import "./Home.css";
 
-export default function Home() {
+export default function home() {
   return (
     <>
       <Header />

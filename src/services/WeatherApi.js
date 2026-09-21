@@ -68,3 +68,15 @@ export async function BuscarClima(latitude, longitude, timezone = "auto") {
 
   return data;
 }
+
+export async function buscarCidades(nome, codigoPais) {
+  return await BuscarCidades(nome, codigoPais);
+}
+
+export async function buscarCidade(nome, codigoPais) {
+  return await BuscarCidade(nome, codigoPais);
+}
+
+export async function buscarClima(latitude, longitude, timezone = "auto") {
+  return await BuscarClima(latitude, longitude, timezone);
+}

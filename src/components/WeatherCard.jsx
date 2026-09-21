@@ -5,12 +5,12 @@ export default function WeatherCard({ cidade, clima, codigoPais }) {
     clima?.current?.uv_index ?? clima?.daily?.uv_index_max?.[0];
 
   return (
-    <section className="weather-card">
+    <section className="weatherCard">
       <h2>{cidade}</h2>
-      <div className="weather-temperatura">
+      <div className="weatherTemperatura">
         {clima?.current?.temperature_2m}°C
       </div>
-      <div className="weather-info">
+      <div className="weatherInfo">
         <p>
           <strong>Umidade:</strong>
           <span>{clima?.current?.relative_humidity_2m}%</span>

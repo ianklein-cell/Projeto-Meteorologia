@@ -4,7 +4,7 @@ export default function Forecast({ clima, codigoPais }) {
   return (
     <section>
       <h2>Previsão dos próximos 7 dias</h2>
-      <div className="forecast-container">
+      <div className="forecastContainer">
         {clima.daily.time.map((dia, index) => (
           <ForecastCard
             key={dia}

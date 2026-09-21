@@ -85,7 +85,7 @@
   margin: 0;
 }
 
-.favorito-japao {
+.favoritoJapao {
   border: 2px solid #bc002d;
   background: linear-gradient(
     rgba(255, 255, 255, 0.94),
@@ -93,19 +93,19 @@
   );
 }
 
-.favorito-japao h2 {
+.favoritoJapao h2 {
   color: #bc002d;
 }
 
-.favorito-japao .botoesFavorito button:first-child {
+.favoritoJapao .botoesFavorito button:first-child {
   background: #bc002d;
 }
 
-.favorito-japao .botoesFavorito button:first-child:hover {
+.favoritoJapao .botoesFavorito button:first-child:hover {
   background: #8f0022;
 }
 
-.favorito-brasil {
+.favoritoBrasil {
   border: 2px solid #047857;
   background: linear-gradient(
     rgba(255, 255, 255, 0.94),
@@ -113,19 +113,19 @@
   );
 }
 
-.favorito-brasil h2 {
+.favoritoBrasil h2 {
   color: #047857;
 }
 
-.favorito-brasil .botoesFavorito button:first-child {
+.favoritoBrasil .botoesFavorito button:first-child {
   background: #047857;
 }
 
-.favorito-brasil .botoesFavorito button:first-child:hover {
+.favoritoBrasil .botoesFavorito button:first-child:hover {
   background: #065f46;
 }
 
-.favorito-eua {
+.favoritoEua {
   border: 2px solid #1e40af;
   background: linear-gradient(
     rgba(255, 255, 255, 0.94),
@@ -133,15 +133,15 @@
   );
 }
 
-.favorito-eua h2 {
+.favoritoEua h2 {
   color: #1e40af;
 }
 
-.favorito-eua .botoesFavorito button:first-child {
+.favoritoEua .botoesFavorito button:first-child {
   background: #1e40af;
 }
 
-.favorito-eua .botoesFavorito button:first-child:hover {
+.favoritoEua .botoesFavorito button:first-child:hover {
   background: #1e3a8a;
 }
 

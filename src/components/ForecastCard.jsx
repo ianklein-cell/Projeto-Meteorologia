@@ -99,9 +99,9 @@ export default function ForecastCard({
 }) {
   const condicao = obterCondicao(weatherCode, codigoPais);
   return (
-    <article className="forecast-card">
+    <article className="forecastCard">
       <h3>{dia}</h3>
-      <div className="icone-tempo">
+      <div className="iconeTempo">
         <img
           src={condicao.icone}
           alt={condicao.descricao}
@@ -110,7 +110,7 @@ export default function ForecastCard({
           loading="lazy"
         />
       </div>
-      <p className="condicao-tempo">{condicao.descricao}</p>
+      <p className="condicaoTempo">{condicao.descricao}</p>
       <p>
         <strong>Máxima:</strong> {maxima} °C
       </p>

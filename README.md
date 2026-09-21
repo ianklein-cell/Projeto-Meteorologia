@@ -1,16 +1,32 @@
-# React + Vite
+  O projeto foi desenvolvido como projeto final do curso de Front-End do SENAI.
+A aplicação permite pesquisar cidades e consultar informações meteorológicas atuais e previsões futuras, além de oferecer recursos como busca de cidades, favoritos, gráficos de previsão, fases da Lua e alertas.
+A interface possui características visuais diferentes para cada país, além de considerar o fuso horário local das cidades consultadas.
+--------------------------------------------------------------------
+##  Funcionalidades
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-  Consulta de cidades do Brasil, Japão e Estados Unidos
+-  Pesquisa de cidades
+-  Temperatura atual
+-  Umidade do ar
+-  Velocidade do vento
+-  Índice UV
+-  Informações sobre neve
+-  Probabilidade de precipitação
+-  Previsão meteorológica para os próximos dias
+-  Gráfico de previsão por hora
+-  Sistema de cidades favoritas
+-  Armazenamento de favoritos utilizando LocalStorage
+-  Visualização das fases da Lua
+-  Sistema de alertas meteorológicos
+-  Utilização do fuso horário local da cidade
+-  Identidade visual específica para cada país
+-  Interface responsiva
+-  Navegação utilizando React Router
+-  Página de erro 404 para rotas inexistentes
+--------------------------------------------------------------------
+No momento possui 3 países disponíveis: Brasil, Japão e Estados Unidos.
+--------------------------------------------------------------------
+APIs utilizadas:
+Open-Meteo Weather API
+National Weather Service API
+United States Geological Survey Earthquake API

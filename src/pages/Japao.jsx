@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
+import { buscarCidades, buscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
 import Forecast from "../components/Forecast";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
-import ForecastGraph from "../components/ForecastGraph";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Japao.css";
 
-const IMAGEM_FUNDO =
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
+
+const imagemFundo =
   "https://flipjapanguide.com/wp-content/uploads/2022/12/What-to-do-when-it-rains-in-Tokyo-Featured-Image.jpg.webp";
 
-export default function Japao() {
+export default function japao() {
   const [cidade, setCidade] = useState({
     nome: "Tóquio",
     pais: "Japão",
@@ -31,11 +32,9 @@ export default function Japao() {
   const [resultados, setResultados] = useState([]);
   const [favoritos, setFavoritos] = useState(() => {
     const salvos = localStorage.getItem("favoritos");
-
     if (!salvos) {
       return [];
     }
-
     try {
       return JSON.parse(salvos);
     } catch {
@@ -49,17 +48,14 @@ export default function Japao() {
         setResultados([]);
         return;
       }
-
       try {
-        const cidades = await BuscarCidades(pesquisa, "JP");
+        const cidades = await buscarCidades(pesquisa, "JP");
         setResultados(cidades);
       } catch {
         setResultados([]);
       }
     }
-
     const timer = setTimeout(pesquisarCidade, 500);
-
     return () => clearTimeout(timer);
   }, [pesquisa]);
 
@@ -67,14 +63,12 @@ export default function Japao() {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
-
       try {
-        const dadosClima = await BuscarClima(
+        const dadosClima = await buscarClima(
           cidade.latitude,
           cidade.longitude,
           cidade.timezone,
         );
-
         setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
@@ -82,7 +76,6 @@ export default function Japao() {
         setCarregando(false);
       }
     }
-
     carregarClima();
   }, [cidade]);
 
@@ -98,9 +91,7 @@ export default function Japao() {
         favorito.nome === cidade.nome &&
         favorito.codigoPais === cidade.codigoPais,
     );
-
     let novosFavoritos;
-
     if (jaFavoritado) {
       novosFavoritos = favoritos.filter(
         (favorito) =>
@@ -112,7 +103,6 @@ export default function Japao() {
     } else {
       novosFavoritos = [...favoritos, cidade];
     }
-
     setFavoritos(novosFavoritos);
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
   }
@@ -133,11 +123,11 @@ export default function Japao() {
 
   return (
     <div
-      className={`pagina-japao periodo-${periodoDoDia}`}
+      className={`paginaJapao periodo-${periodoDoDia}`}
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${IMAGEM_FUNDO}")`,
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${imagemFundo}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -182,7 +172,7 @@ export default function Japao() {
       {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
-        <p className="error-message">{erro}</p>
+        <p className="errorMessage">{erro}</p>
       ) : clima && clima.current ? (
         <div className="conteudoClima">
           <WeatherCard
@@ -196,12 +186,16 @@ export default function Japao() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-          <ForecastGraph
-            clima={clima}
-            nomeCidade={cidade.nome}
-            timezone={cidade.timezone}
-            codigoPais={cidade.codigoPais}
-          />
+
+          <Suspense fallback={<p className="loading">Carregando gráfico...</p>}>
+            <ForecastGraph
+              clima={clima}
+              nomeCidade={cidade.nome}
+              timezone={cidade.timezone}
+              codigoPais={cidade.codigoPais}
+            />
+          </Suspense>
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
@@ -210,7 +204,9 @@ export default function Japao() {
           />
         </div>
       ) : (
-        <p className="mensagemAviso">Não foi possível carregar os dados meteorológicos.</p>
+        <p className="mensagemAviso">
+          Não foi possível carregar os dados meteorológicos.
+        </p>
       )}
     </div>
   );

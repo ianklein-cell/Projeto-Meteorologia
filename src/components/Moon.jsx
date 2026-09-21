@@ -1,19 +1,6 @@
 import { useEffect, useState } from "react";
 import MoonPhases from "./MoonPhases";
 
-function getFaseLuaInfo(fase) {
-  if (fase === 0 || fase === 1) return "Lua Nova 🌑";
-  if (fase > 0 && fase < 0.22) return "Lua Crescente 🌒";
-  if (fase >= 0.22 && fase <= 0.28) return "Quarto Crescente 🌓";
-  if (fase > 0.28 && fase < 0.48) return "Crescente Convexa 🌔";
-  if (fase >= 0.48 && fase <= 0.52) return "Lua Cheia 🌕";
-  if (fase > 0.52 && fase < 0.72) return "Minguante Convexa 🌖";
-  if (fase >= 0.72 && fase <= 0.78) return "Quarto Minguante 🌗";
-  if (fase > 0.78 && fase < 1) return "Lua Minguante 🌘";
-
-  return "Fase não identificada";
-}
-
 export default function Moon({ lat, lon, timezone, codigoPais }) {
   const [dadosLua, setDadosLua] = useState(null);
   const [carregando, setCarregando] = useState(true);

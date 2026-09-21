@@ -7,7 +7,7 @@ import BloodMoon from "./components/BloodMoon";
 import Favoritos from "./pages/Favoritos";
 import Error404 from "./pages/Error404";
 
-export default function App() {
+export default function app() {
   return (
     <div>
       <BloodMoon />
@@ -18,7 +18,6 @@ export default function App() {
         <Route path="/japao" element={<Japao />} />
         <Route path="/eua" element={<EUA />} />
         <Route path="/favoritos" element={<Favoritos />} />
-
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>

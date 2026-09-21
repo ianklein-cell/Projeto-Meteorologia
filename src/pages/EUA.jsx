@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
+import { buscarCidades, buscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
 import Forecast from "../components/Forecast";
 import WeatherCard from "../components/WeatherCard";
@@ -9,12 +9,13 @@ import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./EUA.css";
-import ForecastGraph from "../components/ForecastGraph";
 
-const IMAGEM_FUNDO =
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
+
+const imagemFundo =
   "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
 
-export default function EUA() {
+export default function Eua() {
   const [cidade, setCidade] = useState({
     nome: "Nova York",
     pais: "Estados Unidos",
@@ -51,12 +52,13 @@ export default function EUA() {
       }
 
       try {
-        const cidades = await BuscarCidades(pesquisa, "US");
+        const cidades = await buscarCidades(pesquisa, "US");
         setResultados(cidades);
       } catch {
         setResultados([]);
       }
     }
+
     const timer = setTimeout(pesquisarCidade, 500);
     return () => clearTimeout(timer);
   }, [pesquisa]);
@@ -65,8 +67,9 @@ export default function EUA() {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
+
       try {
-        const dadosClima = await BuscarClima(
+        const dadosClima = await buscarClima(
           cidade.latitude,
           cidade.longitude,
           cidade.timezone,
@@ -78,6 +81,7 @@ export default function EUA() {
         setCarregando(false);
       }
     }
+
     carregarClima();
   }, [cidade]);
 
@@ -128,11 +132,11 @@ export default function EUA() {
 
   return (
     <div
-      className={`pagina-eua periodo-${periodoDoDia}`}
+      className={`paginaEua periodo-${periodoDoDia}`}
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url("${IMAGEM_FUNDO}")`,
+        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url("${imagemFundo}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -161,6 +165,7 @@ export default function EUA() {
           resultados={resultados}
           onSelecionar={selecionarCidade}
         />
+
         <FavoriteButton
           cidade={cidade}
           favorito={favoritoAtual}
@@ -173,7 +178,7 @@ export default function EUA() {
       {carregando ? (
         <p className="loading">Carregando meteorologia...</p>
       ) : erro ? (
-        <p className="error-message">{erro}</p>
+        <p className="errorMessage">{erro}</p>
       ) : clima && clima.current ? (
         <div className="conteudoClima">
           <WeatherCard
@@ -187,12 +192,16 @@ export default function EUA() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-          <ForecastGraph
-            clima={clima}
-            nomeCidade={cidade.nome}
-            timezone={cidade.timezone}
-            codigoPais={cidade.codigoPais}
-          />
+
+          <Suspense fallback={<p className="loading">Carregando gráfico...</p>}>
+            <ForecastGraph
+              clima={clima}
+              nomeCidade={cidade.nome}
+              timezone={cidade.timezone}
+              codigoPais={cidade.codigoPais}
+            />
+          </Suspense>
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

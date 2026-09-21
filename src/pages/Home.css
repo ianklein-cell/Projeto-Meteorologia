@@ -88,23 +88,23 @@
   border-color: #047857;
 }
 
-.pagina-japao .btnVoltar {
+.paginaJapao .btnVoltar {
   color: #bc002d;
   border-color: rgba(188, 0, 45, 0.25);
 }
 
-.pagina-japao .btnVoltar:hover {
+.paginaJapao .btnVoltar:hover {
   background: #bc002d;
   color: #ffffff;
   border-color: #bc002d;
 }
 
-.pagina-eua .btnVoltar {
+.paginaEua .btnVoltar {
   color: #1e40af;
   border-color: rgba(30, 64, 175, 0.25);
 }
 
-.pagina-eua .btnVoltar:hover {
+.paginaEua .btnVoltar:hover {
   background: #1e40af;
   color: #ffffff;
   border-color: #1e40af;

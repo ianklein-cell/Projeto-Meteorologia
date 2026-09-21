@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
+import { buscarCidades, buscarClima } from "../services/WeatherApi";
 import WeatherCard from "../components/WeatherCard";
 import Forecast from "../components/Forecast";
-import ForecastGraph from "../components/ForecastGraph";
 import Moon from "../components/Moon";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Favoritos.css";
@@ -11,16 +10,18 @@ import "./Japao.css";
 import "./Brasil.css";
 import "./EUA.css";
 
-const IMAGEM_FUNDO_JAPAO =
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
+
+const imagemFundoJapao =
   "https://flipjapanguide.com/wp-content/uploads/2022/12/What-to-do-when-it-rains-in-Tokyo-Featured-Image.jpg.webp";
 
-const IMAGEM_FUNDO_BRASIL =
-  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dcf25b5f9397530889fb868bf3143ec391bbbd3d37763";
+const imagemFundoBrasil =
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dfc25b5f9397530889fb868bf3143ec391bbbd3d37763";
 
-const IMAGEM_FUNDO_EUA =
+const imagemFundoEua =
   "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
 
-export default function Favoritos() {
+export default function favoritos() {
   const [favoritos, setFavoritos] = useState([]);
   const [climas, setClimas] = useState({});
   const [cidadeAberta, setCidadeAberta] = useState(null);
@@ -43,9 +44,9 @@ export default function Favoritos() {
           }
 
           const buscas = await Promise.all([
-            BuscarCidades(favorito, "BR"),
-            BuscarCidades(favorito, "JP"),
-            BuscarCidades(favorito, "US"),
+            buscarCidades(favorito, "BR"),
+            buscarCidades(favorito, "JP"),
+            buscarCidades(favorito, "US"),
           ]);
 
           const cidadeEncontrada = buscas
@@ -84,7 +85,7 @@ export default function Favoritos() {
     setCarregando(true);
 
     try {
-      const climaDados = await BuscarClima(
+      const climaDados = await buscarClima(
         cidade.latitude,
         cidade.longitude,
         cidade.timezone,
@@ -97,17 +98,15 @@ export default function Favoritos() {
 
         climaTratado = {
           ...climaDados,
-
           current: {
             ...climaDados.current,
-            weather_code: codigosNeve.includes(climaDados.current?.weather_code)
+            weatherCode: codigosNeve.includes(climaDados.current?.weatherCode)
               ? 61
-              : climaDados.current?.weather_code,
+              : climaDados.current?.weatherCode,
           },
-
           daily: {
             ...climaDados.daily,
-            weather_code: climaDados.daily?.weather_code?.map((codigo) =>
+            weatherCode: climaDados.daily?.weatherCode?.map((codigo) =>
               codigosNeve.includes(codigo) ? 61 : codigo,
             ),
           },
@@ -135,14 +134,11 @@ export default function Favoritos() {
     const chave = cidade.nome + cidade.codigoPais;
 
     setFavoritos(novosFavoritos);
-
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
 
     setClimas((anteriores) => {
       const novosClimas = { ...anteriores };
-
       delete novosClimas[chave];
-
       return novosClimas;
     });
 
@@ -171,11 +167,11 @@ export default function Favoritos() {
 
               const classePais =
                 cidade.codigoPais === "JP"
-                  ? " favorito-japao"
+                  ? " favoritoJapao"
                   : cidade.codigoPais === "BR"
-                    ? " favorito-brasil"
+                    ? " favoritoBrasil"
                     : cidade.codigoPais === "US"
-                      ? " favorito-eua"
+                      ? " favoritoEua"
                       : "";
 
               const japones = cidade.codigoPais === "JP";
@@ -220,17 +216,17 @@ export default function Favoritos() {
                     <div
                       className={
                         japones
-                          ? `climaFavorito pagina-japao periodo-${periodoDoDia}`
+                          ? `climaFavorito paginaJapao periodo-${periodoDoDia}`
                           : brasileiro
                             ? `climaFavorito paginaBrasil periodo-${periodoDoDia}`
                             : americano
-                              ? `climaFavorito pagina-eua periodo-${periodoDoDia}`
+                              ? `climaFavorito paginaEua periodo-${periodoDoDia}`
                               : "climaFavorito"
                       }
                       style={
                         japones
                           ? {
-                              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url("${IMAGEM_FUNDO_JAPAO}")`,
+                              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url("${imagemFundoJapao}")`,
                               backgroundSize: "cover",
                               backgroundPosition: "center",
                               backgroundRepeat: "no-repeat",
@@ -239,7 +235,7 @@ export default function Favoritos() {
                             }
                           : brasileiro
                             ? {
-                                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${IMAGEM_FUNDO_BRASIL}")`,
+                                backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${imagemFundoBrasil}")`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
@@ -248,7 +244,7 @@ export default function Favoritos() {
                               }
                             : americano
                               ? {
-                                  backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url("${IMAGEM_FUNDO_EUA}")`,
+                                  backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url("${imagemFundoEua}")`,
                                   backgroundSize: "cover",
                                   backgroundPosition: "center",
                                   backgroundRepeat: "no-repeat",
@@ -270,12 +266,18 @@ export default function Favoritos() {
 
                       <Forecast clima={clima} codigoPais={cidade.codigoPais} />
 
-                      <ForecastGraph
-                        clima={clima}
-                        nomeCidade={cidade.nome}
-                        timezone={cidade.timezone}
-                        codigoPais={cidade.codigoPais}
-                      />
+                      <Suspense
+                        fallback={
+                          <p className="loading">Carregando gráfico...</p>
+                        }
+                      >
+                        <ForecastGraph
+                          clima={clima}
+                          nomeCidade={cidade.nome}
+                          timezone={cidade.timezone}
+                          codigoPais={cidade.codigoPais}
+                        />
+                      </Suspense>
 
                       <Moon
                         lat={cidade.latitude}
