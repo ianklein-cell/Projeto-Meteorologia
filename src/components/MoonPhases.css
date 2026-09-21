@@ -1,0 +1,749 @@
+/* =========================================================
+   MOON PHASES - ESTILO COMPLETO
+========================================================= */
+
+.fasesLua {
+  width: 100%;
+  margin-top: 25px;
+  padding: 24px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.96);
+  border: 2px solid #dbe4ea;
+  border-radius: 22px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  position: relative;
+  overflow: hidden;
+
+  transition: 0.3s ease;
+}
+
+/* =========================================================
+   FAIXA SUPERIOR
+========================================================= */
+
+.fasesLua::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 5px;
+
+  background: #64748b;
+}
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.fasesLuaCabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.fasesLuaCabecalho > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconeLua {
+  font-size: 25px;
+}
+
+.fasesLuaCabecalho h2 {
+  margin: 0;
+
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.fasesLuaCabecalho p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* =========================================================
+   BOTÕES DO CABEÇALHO
+========================================================= */
+
+.fasesLuaBotoes {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.fasesLuaBotoes button {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef2f5;
+  color: #0f172a;
+
+  font-size: 21px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.fasesLuaBotoes button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   SISTEMA SOL + TERRA + LUA
+========================================================= */
+
+.sistemaLua {
+  width: 100%;
+  height: 405px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+  border: 2px solid rgba(100, 116, 139, 0.4);
+
+  background: #071827;
+
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.25),
+    0 5px 18px rgba(0, 0, 0, 0.08);
+
+  cursor: grab;
+
+  touch-action: pan-y;
+
+  transition: 0.3s ease;
+}
+
+.sistemaLua:active {
+  cursor: grabbing;
+}
+
+.sistemaLua svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   ÓRBITA
+========================================================= */
+
+.sistemaLua ellipse {
+  fill: none !important;
+  fill-opacity: 0 !important;
+
+  stroke: #64748b !important;
+  stroke-width: 2 !important;
+
+  stroke-dasharray: 8 8 !important;
+}
+
+/* =========================================================
+   LINHA DE ILUMINAÇÃO DO SOL
+========================================================= */
+
+.sistemaLua line {
+  stroke: rgba(255, 255, 255, 0.18) !important;
+  stroke-width: 2 !important;
+}
+
+/* =========================================================
+   TERRA
+========================================================= */
+
+.sistemaLua .continente {
+  fill: #22c55e !important;
+  stroke: none !important;
+}
+
+/* =========================================================
+   TEXTOS DO SVG
+========================================================= */
+
+.sistemaLua text {
+  font-family: Arial, Helvetica, sans-serif;
+
+  fill: white !important;
+
+  font-weight: bold;
+}
+
+/* =========================================================
+   LUA
+========================================================= */
+
+.luaSvg {
+  transition: transform 0.55s ease;
+}
+
+.luaSvg circle {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+}
+
+/* =========================================================
+   CONTROLES DAS FASES
+========================================================= */
+
+.controleFases {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  margin: 20px 0;
+}
+
+.controleFases > button {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+
+  border: none;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef2f5;
+  color: #0f172a;
+
+  font-size: 26px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.controleFases > button:hover {
+  transform: scale(1.08);
+}
+
+/* =========================================================
+   INDICADORES DAS FASES
+========================================================= */
+
+.indicadoresFases {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 8px 12px;
+
+  border: 2px solid #dbe4ea;
+  border-radius: 30px;
+
+  background: rgba(100, 116, 139, 0.08);
+}
+
+.indicadoresFases button {
+  width: 38px;
+  height: 38px;
+
+  padding: 0;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.indicadoresFases button:hover {
+  transform: translateY(-3px) scale(1.08);
+}
+
+.indicadoresFases button.faseSelecionada {
+  transform: scale(1.15);
+}
+
+/* =========================================================
+   INFORMAÇÕES DA FASE
+========================================================= */
+
+.informacaoFase {
+  margin-top: 15px;
+  padding: 20px;
+
+  border: 2px solid #dbe4ea;
+  border-left: 6px solid #64748b;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  transition: 0.3s ease;
+}
+
+/* =========================================================
+   TÍTULO DA FASE
+========================================================= */
+
+.faseTitulo {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 12px;
+}
+
+.faseTitulo > span {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.faseTitulo h3 {
+  margin: 0 0 4px;
+
+  font-size: 22px;
+
+  color: #0f172a;
+}
+
+.faseTitulo strong {
+  font-size: 14px;
+
+  color: #475569;
+}
+
+/* =========================================================
+   DESCRIÇÃO
+========================================================= */
+
+.informacaoFase > p {
+  margin: 14px 0;
+
+  color: #334155;
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   HORÁRIOS DA LUA
+========================================================= */
+
+.dadosLua {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+
+  margin-top: 15px;
+}
+
+.dadosLua > div {
+  min-height: 90px;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  border-radius: 14px;
+
+  background: rgba(15, 23, 42, 0.06);
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.dadosLua span {
+  font-size: 25px;
+}
+
+.dadosLua small {
+  margin-top: 4px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.dadosLua strong {
+  margin-top: 4px;
+
+  color: #0f172a;
+
+  font-size: 17px;
+}
+
+/* =========================================================
+   INDICADOR INFERIOR
+========================================================= */
+
+.fasesLuaIndicador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.fasesLuaIndicador p {
+  margin: 0;
+}
+
+/* =========================================================
+   🇧🇷 TEMA BRASIL
+========================================================= */
+
+.fases-br {
+  border-color: #047857;
+
+  background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+
+  box-shadow: 0 8px 25px rgba(4, 120, 87, 0.18);
+}
+
+.fases-br::before {
+  background: linear-gradient(90deg, #047857 0%, #10b981 45%, #f59e0b 100%);
+}
+
+.fases-br .fasesLuaCabecalho h2 {
+  color: #047857;
+}
+
+.fases-br .sistemaLua {
+  border-color: rgba(4, 120, 87, 0.55);
+
+  box-shadow:
+    inset 0 0 35px rgba(4, 120, 87, 0.12),
+    0 5px 18px rgba(4, 120, 87, 0.12);
+}
+
+.fases-br .fasesLuaBotoes button,
+.fases-br .controleFases > button {
+  background: #047857;
+  color: white;
+}
+
+.fases-br .fasesLuaBotoes button:hover,
+.fases-br .controleFases > button:hover {
+  background: #059669;
+}
+
+.fases-br .indicadoresFases {
+  border-color: #047857;
+  background: rgba(4, 120, 87, 0.08);
+}
+
+.fases-br .indicadoresFases button:hover {
+  background: #d1fae5;
+}
+
+.fases-br .indicadoresFases button.faseSelecionada {
+  background: #d1fae5;
+  border-color: #047857;
+}
+
+.fases-br .informacaoFase {
+  border-color: #047857;
+  border-left-color: #047857;
+}
+
+.fases-br .faseTitulo h3,
+.fases-br .faseTitulo strong {
+  color: #047857;
+}
+
+.fases-br .fasesLuaIndicador {
+  color: #047857;
+}
+
+/* =========================================================
+   🇯🇵 TEMA JAPÃO
+========================================================= */
+
+.fases-jp {
+  border-color: #bc002d;
+
+  background: linear-gradient(180deg, #ffffff 0%, #fff4f6 100%);
+
+  box-shadow: 0 8px 25px rgba(188, 0, 45, 0.18);
+}
+
+.fases-jp::before {
+  background: linear-gradient(90deg, #bc002d 0%, #ffffff 50%, #bc002d 100%);
+}
+
+.fases-jp .fasesLuaCabecalho h2 {
+  color: #bc002d;
+}
+
+.fases-jp .sistemaLua {
+  border-color: rgba(188, 0, 45, 0.55);
+
+  box-shadow:
+    inset 0 0 35px rgba(188, 0, 45, 0.1),
+    0 5px 18px rgba(188, 0, 45, 0.12);
+}
+
+.fases-jp .fasesLuaBotoes button,
+.fases-jp .controleFases > button {
+  background: #bc002d;
+  color: white;
+}
+
+.fases-jp .fasesLuaBotoes button:hover,
+.fases-jp .controleFases > button:hover {
+  background: #d9043d;
+}
+
+.fases-jp .indicadoresFases {
+  border-color: #bc002d;
+  background: rgba(188, 0, 45, 0.07);
+}
+
+.fases-jp .indicadoresFases button:hover {
+  background: #ffe4e9;
+}
+
+.fases-jp .indicadoresFases button.faseSelecionada {
+  background: #ffe4e9;
+  border-color: #bc002d;
+}
+
+.fases-jp .informacaoFase {
+  border-color: #bc002d;
+  border-left-color: #bc002d;
+}
+
+.fases-jp .faseTitulo h3,
+.fases-jp .faseTitulo strong {
+  color: #bc002d;
+}
+
+.fases-jp .fasesLuaIndicador {
+  color: #bc002d;
+}
+
+/* =========================================================
+   🇺🇸 TEMA EUA
+========================================================= */
+
+.fases-us {
+  border-color: #1e3a8a;
+
+  background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.18);
+}
+
+.fases-us::before {
+  background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 45%, #b91c1c 100%);
+}
+
+.fases-us .fasesLuaCabecalho h2 {
+  color: #1e3a8a;
+}
+
+.fases-us .sistemaLua {
+  border-color: rgba(30, 58, 138, 0.55);
+
+  box-shadow:
+    inset 0 0 35px rgba(30, 58, 138, 0.1),
+    0 5px 18px rgba(30, 58, 138, 0.12);
+}
+
+.fases-us .fasesLuaBotoes button,
+.fases-us .controleFases > button {
+  background: #1e3a8a;
+  color: white;
+}
+
+.fases-us .fasesLuaBotoes button:hover,
+.fases-us .controleFases > button:hover {
+  background: #2563eb;
+}
+
+.fases-us .indicadoresFases {
+  border-color: #1e3a8a;
+  background: rgba(30, 58, 138, 0.07);
+}
+
+.fases-us .indicadoresFases button:hover {
+  background: #dbeafe;
+}
+
+.fases-us .indicadoresFases button.faseSelecionada {
+  background: #dbeafe;
+  border-color: #1e3a8a;
+}
+
+.fases-us .informacaoFase {
+  border-color: #1e3a8a;
+  border-left-color: #1e3a8a;
+}
+
+.fases-us .faseTitulo h3,
+.fases-us .faseTitulo strong {
+  color: #1e3a8a;
+}
+
+.fases-us .fasesLuaIndicador {
+  color: #1e3a8a;
+}
+
+/* =========================================================
+   RESPONSIVIDADE - TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .fasesLua {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .fasesLuaCabecalho {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sistemaLua {
+    height: 330px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVIDADE - CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+  .fasesLua {
+    padding: 15px 10px;
+    border-radius: 16px;
+  }
+
+  .fasesLuaCabecalho h2 {
+    font-size: 19px;
+  }
+
+  .fasesLuaCabecalho p {
+    font-size: 12px;
+  }
+
+  .fasesLuaBotoes button {
+    width: 37px;
+    height: 37px;
+
+    font-size: 19px;
+  }
+
+  .sistemaLua {
+    height: 260px;
+
+    border-radius: 15px;
+  }
+
+  .controleFases {
+    gap: 6px;
+
+    margin: 15px 0;
+  }
+
+  .controleFases > button {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+
+    font-size: 22px;
+
+    border-radius: 10px;
+  }
+
+  .indicadoresFases {
+    gap: 2px;
+    padding: 5px;
+  }
+
+  .indicadoresFases button {
+    width: 30px;
+    height: 30px;
+
+    font-size: 16px;
+  }
+
+  .faseTitulo {
+    gap: 10px;
+  }
+
+  .faseTitulo > span {
+    font-size: 34px;
+  }
+
+  .faseTitulo h3 {
+    font-size: 18px;
+  }
+
+  .informacaoFase {
+    padding: 15px;
+  }
+
+  .informacaoFase > p {
+    font-size: 14px;
+  }
+
+  .dadosLua {
+    grid-template-columns: 1fr;
+  }
+
+  .dadosLua > div {
+    min-height: 80px;
+  }
+
+  .fasesLuaIndicador {
+    font-size: 11px;
+  }
+}

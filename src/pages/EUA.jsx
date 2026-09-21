@@ -197,6 +197,7 @@ export default function EUA() {
             lat={cidade.latitude}
             lon={cidade.longitude}
             timezone={cidade.timezone}
+            codigoPais={cidade.codigoPais}
           />
         </div>
       ) : (

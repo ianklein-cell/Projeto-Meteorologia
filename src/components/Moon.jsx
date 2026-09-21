@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import MoonPhases from "./MoonPhases";
 
 function getFaseLuaInfo(fase) {
   if (fase === 0 || fase === 1) return "Lua Nova 🌑";
@@ -9,29 +10,25 @@ function getFaseLuaInfo(fase) {
   if (fase > 0.52 && fase < 0.72) return "Minguante Convexa 🌖";
   if (fase >= 0.72 && fase <= 0.78) return "Quarto Minguante 🌗";
   if (fase > 0.78 && fase < 1) return "Lua Minguante 🌘";
+
   return "Fase não identificada";
 }
 
-function formatarHorario(isoString) {
-  if (!isoString) return "Não ocorre hoje";
-  return new Date(isoString).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
-export default function Moon({ lat, lon, timezone }) {
+export default function Moon({ lat, lon, timezone, codigoPais }) {
   const [dadosLua, setDadosLua] = useState(null);
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
     async function carregarDadosLua() {
       setCarregando(true);
+
       try {
         const response = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=moonrise,moonset,moon_phase&timezone=${encodeURIComponent(timezone)}`
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=moonrise,moonset,moon_phase&timezone=${encodeURIComponent(timezone)}`,
         );
+
         const data = await response.json();
+
         setDadosLua(data.daily);
       } catch (error) {
         console.error("Erro ao buscar fases da lua:", error);
@@ -39,13 +36,19 @@ export default function Moon({ lat, lon, timezone }) {
         setCarregando(false);
       }
     }
+
     if (lat && lon && timezone) {
       carregarDadosLua();
     }
   }, [lat, lon, timezone]);
 
-  if (carregando) return <p>Carregando dados da lua...</p>;
-  if (!dadosLua) return null;
+  if (carregando) {
+    return <p>Carregando dados da lua...</p>;
+  }
+
+  if (!dadosLua) {
+    return null;
+  }
 
   const faseValor = dadosLua.moon_phase[0];
   const nascerLua = dadosLua.moonrise[0];
@@ -53,16 +56,12 @@ export default function Moon({ lat, lon, timezone }) {
 
   return (
     <div>
-      <h3>Informações Astronômicas 🌙</h3>
-      <p>
-        <strong>Fase Atual:</strong> {getFaseLuaInfo(faseValor)}
-      </p>
-      <p>
-        <strong>Nascer da Lua:</strong> {formatarHorario(nascerLua)}
-      </p>
-      <p>
-        <strong>Pôr da Lua:</strong> {formatarHorario(porLua)}
-      </p>
+      <MoonPhases
+        faseAtual={faseValor}
+        nascerLua={nascerLua}
+        porLua={porLua}
+        codigoPais={codigoPais}
+      />
     </div>
   );
 }

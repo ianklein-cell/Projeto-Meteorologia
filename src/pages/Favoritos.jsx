@@ -29,6 +29,7 @@ export default function Favoritos() {
   useEffect(() => {
     async function carregarFavoritos() {
       const salvos = localStorage.getItem("favoritos");
+
       if (!salvos) return;
 
       try {
@@ -93,14 +94,17 @@ export default function Favoritos() {
 
       if (cidade.codigoPais === "BR") {
         const codigosNeve = [56, 57, 66, 67, 71, 73, 75, 77, 85, 86];
+
         climaTratado = {
           ...climaDados,
+
           current: {
             ...climaDados.current,
             weather_code: codigosNeve.includes(climaDados.current?.weather_code)
               ? 61
               : climaDados.current?.weather_code,
           },
+
           daily: {
             ...climaDados.daily,
             weather_code: climaDados.daily?.weather_code?.map((codigo) =>
@@ -131,11 +135,14 @@ export default function Favoritos() {
     const chave = cidade.nome + cidade.codigoPais;
 
     setFavoritos(novosFavoritos);
+
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
 
     setClimas((anteriores) => {
       const novosClimas = { ...anteriores };
+
       delete novosClimas[chave];
+
       return novosClimas;
     });
 
@@ -201,7 +208,10 @@ export default function Favoritos() {
                           : "Ver clima"}
                     </button>
 
-                    <button type="button" onClick={() => removerFavorito(cidade)}>
+                    <button
+                      type="button"
+                      onClick={() => removerFavorito(cidade)}
+                    >
                       Remover dos favoritos
                     </button>
                   </div>
@@ -259,6 +269,7 @@ export default function Favoritos() {
                       </p>
 
                       <Forecast clima={clima} codigoPais={cidade.codigoPais} />
+
                       <ForecastGraph
                         clima={clima}
                         nomeCidade={cidade.nome}
@@ -270,6 +281,7 @@ export default function Favoritos() {
                         lat={cidade.latitude}
                         lon={cidade.longitude}
                         timezone={cidade.timezone}
+                        codigoPais={cidade.codigoPais}
                       />
                     </div>
                   )}
