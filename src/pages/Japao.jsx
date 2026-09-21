@@ -196,6 +196,12 @@ export default function Japao() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
+          <ForecastGraph
+            clima={clima}
+            nomeCidade={cidade.nome}
+            timezone={cidade.timezone}
+            codigoPais={cidade.codigoPais}
+          />
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
