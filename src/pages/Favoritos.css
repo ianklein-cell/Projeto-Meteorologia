@@ -1,7 +1,23 @@
 .favoritosContainer {
+  min-height: 100vh;
+  width: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
+    url("https://images.groovetech.io/chcuSP46nJ_gXXGIJDcCvJDe9p2GtL1-bJWr02_os7M/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzVmZTA3NDAwOGZjY2JlMDA2OTMzZGE2Mi8xNjYyNTY5ODY3X2JyYXppbC1mbGFnMTI4MC5qcGc.webp"),
+    url("https://img.goodfon.com/wallpaper/big/5/d5/japan-yaponiya-flag.webp"),
+    url("https://img.wallscloud.net/uploads/thumb/1266658504/usa-america-flag-rmEK-1000x0-MM-80.webp");
+  background-position: left top, 0% 0%, 50% 0%, 100% 0%;
+  background-size: 100% 100%, 33.33% 100%, 33.33% 100%, 33.33% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  box-sizing: border-box;
+}
+
+.favoritosConteudo {
   width: min(1200px, 92%);
   margin: 0 auto;
   padding: 40px 0;
+  box-sizing: border-box;
 }
 
 .btnVoltar {
@@ -26,7 +42,8 @@
 .favoritoItem {
   padding: 25px;
   border-radius: 18px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
   border: 1px solid #e2e8f0;
   box-shadow: 0 8px 20px rgba(20, 45, 70, 0.06);
 }
@@ -88,10 +105,6 @@
   background: #8f0022;
 }
 
-.favorito-japao .climaFavorito {
-  padding-top: 5px;
-}
-
 .favorito-brasil {
   border: 2px solid #047857;
   background: linear-gradient(
@@ -110,10 +123,6 @@
 
 .favorito-brasil .botoesFavorito button:first-child:hover {
   background: #065f46;
-}
-
-.favorito-brasil .climaFavorito {
-  padding-top: 5px;
 }
 
 .favorito-eua {
@@ -136,12 +145,8 @@
   background: #1e3a8a;
 }
 
-.favorito-eua .climaFavorito {
-  padding-top: 5px;
-}
-
 @media (max-width: 600px) {
-  .favoritosContainer {
+  .favoritosConteudo {
     width: 92%;
     padding: 25px 0;
   }
