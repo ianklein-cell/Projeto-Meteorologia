@@ -55,3 +55,34 @@
 .btnVoltarHome:hover {
   background: #125487;
 }
+
+@media (max-width: 600px) {
+  .errorContainer {
+    background-size: 90%; 
+    padding: 15px;
+  }
+
+  .errorCard {
+    padding: 25px 20px; 
+    border-radius: 16px;
+  }
+
+  .errorCard h1 {
+    font-size: 64px;
+  }
+
+  .errorCard h2 {
+    font-size: 18px;
+  }
+
+  .errorCard p {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .btnVoltarHome {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 0;
+  }
+}

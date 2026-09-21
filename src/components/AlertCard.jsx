@@ -45,8 +45,6 @@ export default function AlertCard({ tipo, lat, lon }) {
               severidade: "Alta",
             });
 
-            // O alerta só abre automaticamente se ainda não foi fechado
-            // pelo usuário durante esta sessão.
             if (!jaVisto) {
               setAberto(true);
             }
@@ -81,8 +79,6 @@ export default function AlertCard({ tipo, lat, lon }) {
 
             atualizarDetalhesTerremoto(primeiroTerremoto);
 
-            // O alerta abre automaticamente apenas se o usuário
-            // ainda não o fechou durante esta sessão.
             if (!jaVisto) {
               setAberto(true);
             }
@@ -150,8 +146,6 @@ export default function AlertCard({ tipo, lat, lon }) {
     setIndiceSelecionado(novoIndice);
     atualizarDetalhesTerremoto(terremoto);
 
-    // Ao escolher manualmente outro terremoto,
-    // o alerta sempre abre.
     setAberto(true);
 
     if (!jaVisto) {

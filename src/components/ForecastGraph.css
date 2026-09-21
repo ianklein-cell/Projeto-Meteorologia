@@ -12,10 +12,6 @@
   transition: 0.3s ease;
 }
 
-/* =========================
-   BRASIL 🇧🇷
-========================= */
-
 .graficoPrevisao.grafico-br {
   border: 2px solid #047857;
   box-shadow: 0 8px 25px rgba(4, 120, 87, 0.15);
@@ -30,10 +26,6 @@
   height: 5px;
   background: linear-gradient(90deg, #047857 0%, #10b981 45%, #f59e0b 100%);
 }
-
-/* =========================
-   JAPÃO 🇯🇵
-========================= */
 
 .graficoPrevisao.grafico-jp {
   border: 2px solid #bc002d;
@@ -60,10 +52,6 @@
   pointer-events: none;
 }
 
-/* =========================
-   ESTADOS UNIDOS 🇺🇸
-========================= */
-
 .graficoPrevisao.grafico-us {
   border: 2px solid #1e3a8a;
   box-shadow: 0 8px 25px rgba(30, 58, 138, 0.18);
@@ -79,10 +67,6 @@
   background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 45%, #b91c1c 100%);
 }
 
-/* =========================
-   CABEÇALHO
-========================= */
-
 .graficoCabecalho {
   display: flex;
   align-items: center;
@@ -95,27 +79,17 @@
   font-size: 22px;
 }
 
-/* Brasil */
-
 .grafico-br .graficoCabecalho h2 {
   color: #047857;
 }
-
-/* Japão */
 
 .grafico-jp .graficoCabecalho h2 {
   color: #bc002d;
 }
 
-/* EUA */
-
 .grafico-us .graficoCabecalho h2 {
   color: #1e3a8a;
 }
-
-/* =========================
-   OPÇÕES
-========================= */
 
 .graficoOpcoes {
   display: flex;
@@ -145,15 +119,11 @@
   transform: translateY(-1px);
 }
 
-/* Brasil */
-
 .grafico-br .graficoOpcoes button.opcaoAtiva {
   background: #047857;
   color: white;
   box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
 }
-
-/* Japão */
 
 .grafico-jp .graficoOpcoes button.opcaoAtiva {
   background: #bc002d;
@@ -161,26 +131,16 @@
   box-shadow: 0 4px 12px rgba(188, 0, 45, 0.25);
 }
 
-/* EUA */
-
 .grafico-us .graficoOpcoes button.opcaoAtiva {
   background: #1e3a8a;
   color: white;
   box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
 }
 
-/* =========================
-   ÁREA DO GRÁFICO
-========================= */
-
 .graficoArea {
   width: 100%;
   margin-top: 5px;
 }
-
-/* =========================
-   RESPONSIVIDADE
-========================= */
 
 @media (max-width: 600px) {
   .graficoPrevisao {

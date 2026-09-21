@@ -144,6 +144,7 @@
   background: #fff7f7;
   color: #374151;
 }
+
 .alertaFixo {
   position: fixed;
   right: 80px;
@@ -170,6 +171,7 @@
 .alertaFixo:hover {
   transform: scale(1.08);
 }
+
 @keyframes piscaAlerta {
   0%,
   100% {
@@ -230,28 +232,35 @@
     box-shadow: 0 0 0 9px rgba(239, 68, 68, 0);
   }
 }
+
 @media (max-width: 600px) {
   .alertaOverlay {
-    padding: 60px 12px 12px;
+    padding: 20px 12px;
   }
+
   .alertaCard {
     padding: 22px 18px;
   }
+
   .alertaCabecalho {
     gap: 10px;
   }
+
   .alertaIcone {
     width: 48px;
     height: 48px;
     font-size: 25px;
   }
+
   .alertaCard h2 {
     font-size: 1.1rem;
   }
+
   .alertaFixo {
-    right: 15px;
-    bottom: 15px;
-    width: 52px;
-    height: 52px;
+    right: 20px;
+    bottom: 80px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
   }
 }

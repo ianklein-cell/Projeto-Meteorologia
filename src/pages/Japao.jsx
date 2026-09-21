@@ -206,6 +206,7 @@ export default function Japao() {
             lat={cidade.latitude}
             lon={cidade.longitude}
             timezone={cidade.timezone}
+            codigoPais={cidade.codigoPais}
           />
         </div>
       ) : (
