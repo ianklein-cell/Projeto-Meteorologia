@@ -9,6 +9,7 @@ import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./EUA.css";
+import ForecastGraph from "../components/ForecastGraph";
 
 const IMAGEM_FUNDO =
   "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
@@ -186,7 +187,12 @@ export default function EUA() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-
+          <ForecastGraph
+            clima={clima}
+            nomeCidade={cidade.nome}
+            timezone={cidade.timezone}
+            codigoPais={cidade.codigoPais}
+          />
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

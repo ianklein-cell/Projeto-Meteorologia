@@ -6,6 +6,7 @@ import Forecast from "../components/Forecast";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
+import ForecastGraph from "../components/ForecastGraph";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Brasil.css";
 
@@ -62,7 +63,7 @@ export default function Brasil() {
         const dadosClima = await BuscarClima(
           cidade.latitude,
           cidade.longitude,
-          cidade.timezone
+          cidade.timezone,
         );
 
         setClima(dadosClima);
@@ -85,7 +86,7 @@ export default function Brasil() {
     const jaFavoritado = favoritos.some(
       (favorito) =>
         favorito.nome === cidade.nome &&
-        favorito.codigoPais === cidade.codigoPais
+        favorito.codigoPais === cidade.codigoPais,
     );
     let novosFavoritos;
     if (jaFavoritado) {
@@ -94,7 +95,7 @@ export default function Brasil() {
           !(
             favorito.nome === cidade.nome &&
             favorito.codigoPais === cidade.codigoPais
-          )
+          ),
       );
     } else {
       novosFavoritos = [...favoritos, cidade];
@@ -106,14 +107,14 @@ export default function Brasil() {
   const favoritoAtual = favoritos.some(
     (favorito) =>
       favorito.nome === cidade.nome &&
-      favorito.codigoPais === cidade.codigoPais
+      favorito.codigoPais === cidade.codigoPais,
   );
 
   const periodoDoDia = clima?.current?.time
     ? identificarPeriodoDoDia(
         clima.current.time,
         clima.daily.sunrise[0],
-        clima.daily.sunset[0]
+        clima.daily.sunset[0],
       )
     : "dia";
 
@@ -176,7 +177,12 @@ export default function Brasil() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-
+          <ForecastGraph
+            clima={clima}
+            nomeCidade={cidade.nome}
+            timezone={cidade.timezone}
+            codigoPais={cidade.codigoPais}
+          />
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
