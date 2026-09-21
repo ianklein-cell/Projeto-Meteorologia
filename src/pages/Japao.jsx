@@ -11,7 +11,7 @@ import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Japao.css";
 
 const IMAGEM_FUNDO =
-  "https://media.istockphoto.com/id/2189197752/pt/vetorial/japan-the-country-silhouette-on-the-national-flag.jpg?s=612x612&w=0&k=20&c=DxwwAPbJNocH-nHDXuszDb8vZtxjhr0cJg38sQ15rS8=";
+  "https://flipjapanguide.com/wp-content/uploads/2022/12/What-to-do-when-it-rains-in-Tokyo-Featured-Image.jpg.webp";
 
 export default function Japao() {
   const [cidade, setCidade] = useState({
@@ -136,10 +136,10 @@ export default function Japao() {
       style={{
         minHeight: "100vh",
         width: "100%",
-        "--imagem-fundo": `url("${IMAGEM_FUNDO}")`,
-        backgroundSize: "100% 100%, 1000px",
-        backgroundPosition: "center, center",
-        backgroundRepeat: "no-repeat, no-repeat",
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), url("${IMAGEM_FUNDO}")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
         padding: "20px",
         boxSizing: "border-box",
@@ -158,12 +158,19 @@ export default function Japao() {
         />
       </h1>
 
-      <SearchBar
-        valor={pesquisa}
-        onChange={setPesquisa}
-        resultados={resultados}
-        onSelecionar={selecionarCidade}
-      />
+      <div className="secaoBusca">
+        <SearchBar
+          valor={pesquisa}
+          onChange={setPesquisa}
+          resultados={resultados}
+          onSelecionar={selecionarCidade}
+        />
+        <FavoriteButton
+          cidade={cidade}
+          favorito={favoritoAtual}
+          onToggle={alternarFavorito}
+        />
+      </div>
 
       <AlertCard
         tipo="terremoto"
@@ -176,22 +183,19 @@ export default function Japao() {
       ) : erro ? (
         <p className="error-message">{erro}</p>
       ) : clima && clima.current ? (
-        <div>
+        <div className="conteudoClima">
           <WeatherCard
             cidade={cidade.nome}
             clima={clima}
             codigoPais={cidade.codigoPais}
           />
 
-          <FavoriteButton
-            cidade={cidade}
-            favorito={favoritoAtual}
-            onToggle={alternarFavorito}
-          />
-          <p>
+          <p className="textoFuso">
             <strong>Fuso horário:</strong> {cidade.timezone}
           </p>
+
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
@@ -199,7 +203,7 @@ export default function Japao() {
           />
         </div>
       ) : (
-        <p>Não foi possível carregar os dados meteorológicos.</p>
+        <p className="mensagemAviso">Não foi possível carregar os dados meteorológicos.</p>
       )}
     </div>
   );

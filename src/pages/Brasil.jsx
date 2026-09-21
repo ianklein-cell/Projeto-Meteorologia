@@ -65,24 +65,7 @@ export default function Brasil() {
           cidade.timezone
         );
 
-        const codigosNeve = [56, 57, 66, 67, 71, 73, 75, 77, 85, 86];
-        const climaTratado = {
-          ...dadosClima,
-          current: {
-            ...dadosClima.current,
-            weather_code: codigosNeve.includes(dadosClima.current?.weather_code)
-              ? 61
-              : dadosClima.current?.weather_code,
-          },
-          daily: {
-            ...dadosClima.daily,
-            weather_code: dadosClima.daily?.weather_code?.map((codigo) =>
-              codigosNeve.includes(codigo) ? 61 : codigo
-            ),
-          },
-        };
-
-        setClima(climaTratado);
+        setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
       } finally {
