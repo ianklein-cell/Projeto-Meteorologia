@@ -30,3 +30,7 @@ APIs utilizadas:
 Open-Meteo Weather API
 National Weather Service API
 United States Geological Survey Earthquake API
+--------------------------------------------------------------------
+Trabalho feito por: Ian Douglas de M. Klein e Luiz Filipe Flores
+--------------------------------------------------------------------
+https://clima-nexus.web.app
