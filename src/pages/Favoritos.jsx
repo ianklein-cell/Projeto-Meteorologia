@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import WeatherCard from "../components/WeatherCard";
 import Forecast from "../components/Forecast";
-import ForecastGraph from "../components/ForecastGraph";
 import Moon from "../components/Moon";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Favoritos.css";
@@ -11,11 +10,13 @@ import "./Japao.css";
 import "./Brasil.css";
 import "./EUA.css";
 
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
+
 const IMAGEM_FUNDO_JAPAO =
   "https://flipjapanguide.com/wp-content/uploads/2022/12/What-to-do-when-it-rains-in-Tokyo-Featured-Image.jpg.webp";
 
 const IMAGEM_FUNDO_BRASIL =
-  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dcf25b5f9397530889fb868bf3143ec391bbbd3d37763";
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dfc25b5f9397530889fb868bf3143ec391bbbd3d37763";
 
 const IMAGEM_FUNDO_EUA =
   "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
@@ -97,14 +98,12 @@ export default function Favoritos() {
 
         climaTratado = {
           ...climaDados,
-
           current: {
             ...climaDados.current,
             weather_code: codigosNeve.includes(climaDados.current?.weather_code)
               ? 61
               : climaDados.current?.weather_code,
           },
-
           daily: {
             ...climaDados.daily,
             weather_code: climaDados.daily?.weather_code?.map((codigo) =>
@@ -135,14 +134,11 @@ export default function Favoritos() {
     const chave = cidade.nome + cidade.codigoPais;
 
     setFavoritos(novosFavoritos);
-
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
 
     setClimas((anteriores) => {
       const novosClimas = { ...anteriores };
-
       delete novosClimas[chave];
-
       return novosClimas;
     });
 
@@ -270,12 +266,18 @@ export default function Favoritos() {
 
                       <Forecast clima={clima} codigoPais={cidade.codigoPais} />
 
-                      <ForecastGraph
-                        clima={clima}
-                        nomeCidade={cidade.nome}
-                        timezone={cidade.timezone}
-                        codigoPais={cidade.codigoPais}
-                      />
+                      <Suspense
+                        fallback={
+                          <p className="loading">Carregando gráfico...</p>
+                        }
+                      >
+                        <ForecastGraph
+                          clima={clima}
+                          nomeCidade={cidade.nome}
+                          timezone={cidade.timezone}
+                          codigoPais={cidade.codigoPais}
+                        />
+                      </Suspense>
 
                       <Moon
                         lat={cidade.latitude}

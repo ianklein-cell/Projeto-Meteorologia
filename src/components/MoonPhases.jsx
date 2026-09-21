@@ -393,15 +393,14 @@ function obterSimboloFase(indice) {
 
   return simbolos[indice];
 }
-
 function obterSombraLua(indice) {
   const sombras = [
     "M0 -29 A29 29 0 1 0 0 29 A29 29 0 1 1 0 -29Z",
     "M0 -29 A29 29 0 0 0 0 29 A17 29 0 0 1 0 -29Z",
     "M0 -29 A29 29 0 0 0 0 29 L0 -29Z",
-    "M0 -29 A29 29 0 0 0 0 29 A17 29 0 0 0 -29Z",
+    "M0 -29 A29 29 0 0 0 0 29 A17 29 0 0 0 0 -29Z",
     "",
-    "M0 -29 A29 29 0 0 1 0 29 A17 29 0 0 0 -29Z",
+    "M0 -29 A29 29 0 0 1 0 29 A17 29 0 0 0 0 -29Z",
     "M0 -29 A29 29 0 0 1 0 29 L0 -29Z",
     "M0 -29 A29 29 0 0 1 0 29 A17 29 0 0 1 0 -29Z",
   ];

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
@@ -6,12 +6,13 @@ import Forecast from "../components/Forecast";
 import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
-import ForecastGraph from "../components/ForecastGraph";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Brasil.css";
 
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
+
 const imagemFundoBrasil =
-  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dcf25b5f9397530889fb868bf3143ec391bbbd3d37763";
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.wired.com%2Fphotos%2F63dd40bb84464089ca2fc6ab%2Fmaster%2Fw_2560%252Cc_limit%2FSci-amazon-1322470077.jpg&f=1&nofb=1&ipt=ffd9fd4f800dceadb73dfc25b5f9397530889fb868bf3143ec391bbbd3d37763";
 
 export default function Brasil() {
   const [cidade, setCidade] = useState({
@@ -22,7 +23,6 @@ export default function Brasil() {
     longitude: -43.1729,
     timezone: "America/Sao_Paulo",
   });
-
   const [clima, setClima] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
@@ -65,7 +65,6 @@ export default function Brasil() {
           cidade.longitude,
           cidade.timezone,
         );
-
         setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
@@ -177,12 +176,16 @@ export default function Brasil() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-          <ForecastGraph
-            clima={clima}
-            nomeCidade={cidade.nome}
-            timezone={cidade.timezone}
-            codigoPais={cidade.codigoPais}
-          />
+
+          <Suspense fallback={<p className="loading">Carregando gráfico...</p>}>
+            <ForecastGraph
+              clima={clima}
+              nomeCidade={cidade.nome}
+              timezone={cidade.timezone}
+              codigoPais={cidade.codigoPais}
+            />
+          </Suspense>
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

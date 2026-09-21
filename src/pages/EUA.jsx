@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
@@ -9,7 +9,8 @@ import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./EUA.css";
-import ForecastGraph from "../components/ForecastGraph";
+
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
 
 const IMAGEM_FUNDO =
   "https://ondeirestadosunidos.com.br/wp-content/uploads/2025/01/Snow-covered-Commonwealth-Avenue-through-the-Back-Bay-neighborhood-of-Boston-1024x576.webp";
@@ -57,6 +58,7 @@ export default function EUA() {
         setResultados([]);
       }
     }
+
     const timer = setTimeout(pesquisarCidade, 500);
     return () => clearTimeout(timer);
   }, [pesquisa]);
@@ -65,6 +67,7 @@ export default function EUA() {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
+
       try {
         const dadosClima = await BuscarClima(
           cidade.latitude,
@@ -78,6 +81,7 @@ export default function EUA() {
         setCarregando(false);
       }
     }
+
     carregarClima();
   }, [cidade]);
 
@@ -161,6 +165,7 @@ export default function EUA() {
           resultados={resultados}
           onSelecionar={selecionarCidade}
         />
+
         <FavoriteButton
           cidade={cidade}
           favorito={favoritoAtual}
@@ -187,12 +192,16 @@ export default function EUA() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-          <ForecastGraph
-            clima={clima}
-            nomeCidade={cidade.nome}
-            timezone={cidade.timezone}
-            codigoPais={cidade.codigoPais}
-          />
+
+          <Suspense fallback={<p className="loading">Carregando gráfico...</p>}>
+            <ForecastGraph
+              clima={clima}
+              nomeCidade={cidade.nome}
+              timezone={cidade.timezone}
+              codigoPais={cidade.codigoPais}
+            />
+          </Suspense>
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}

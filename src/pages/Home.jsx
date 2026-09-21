@@ -24,7 +24,7 @@ export default function Home() {
             codigoPais="jp"
             descricao="Consulte a previsão do tempo no Japão."
             rota="/japao"
-            imagem="/FundoCardJapao.webP"
+            imagem="/FundoCardJapao.webp"
           />
           <CountryCard
             nome="Estados Unidos"

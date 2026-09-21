@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { BuscarCidades, BuscarClima } from "../services/WeatherApi";
 import Moon from "../components/Moon";
@@ -7,9 +7,10 @@ import WeatherCard from "../components/WeatherCard";
 import SearchBar from "../components/SearchBar";
 import FavoriteButton from "../components/FavoriteButton";
 import AlertCard from "../components/AlertCard";
-import ForecastGraph from "../components/ForecastGraph";
 import { identificarPeriodoDoDia } from "../utils/timezone";
 import "./Japao.css";
+
+const ForecastGraph = lazy(() => import("../components/ForecastGraph"));
 
 const IMAGEM_FUNDO =
   "https://flipjapanguide.com/wp-content/uploads/2022/12/What-to-do-when-it-rains-in-Tokyo-Featured-Image.jpg.webp";
@@ -31,11 +32,9 @@ export default function Japao() {
   const [resultados, setResultados] = useState([]);
   const [favoritos, setFavoritos] = useState(() => {
     const salvos = localStorage.getItem("favoritos");
-
     if (!salvos) {
       return [];
     }
-
     try {
       return JSON.parse(salvos);
     } catch {
@@ -49,7 +48,6 @@ export default function Japao() {
         setResultados([]);
         return;
       }
-
       try {
         const cidades = await BuscarCidades(pesquisa, "JP");
         setResultados(cidades);
@@ -57,9 +55,7 @@ export default function Japao() {
         setResultados([]);
       }
     }
-
     const timer = setTimeout(pesquisarCidade, 500);
-
     return () => clearTimeout(timer);
   }, [pesquisa]);
 
@@ -67,14 +63,12 @@ export default function Japao() {
     async function carregarClima() {
       setCarregando(true);
       setErro("");
-
       try {
         const dadosClima = await BuscarClima(
           cidade.latitude,
           cidade.longitude,
           cidade.timezone,
         );
-
         setClima(dadosClima);
       } catch (error) {
         setErro(error.message);
@@ -82,7 +76,6 @@ export default function Japao() {
         setCarregando(false);
       }
     }
-
     carregarClima();
   }, [cidade]);
 
@@ -98,9 +91,7 @@ export default function Japao() {
         favorito.nome === cidade.nome &&
         favorito.codigoPais === cidade.codigoPais,
     );
-
     let novosFavoritos;
-
     if (jaFavoritado) {
       novosFavoritos = favoritos.filter(
         (favorito) =>
@@ -112,7 +103,6 @@ export default function Japao() {
     } else {
       novosFavoritos = [...favoritos, cidade];
     }
-
     setFavoritos(novosFavoritos);
     localStorage.setItem("favoritos", JSON.stringify(novosFavoritos));
   }
@@ -196,12 +186,16 @@ export default function Japao() {
           </p>
 
           <Forecast clima={clima} codigoPais={cidade.codigoPais} />
-          <ForecastGraph
-            clima={clima}
-            nomeCidade={cidade.nome}
-            timezone={cidade.timezone}
-            codigoPais={cidade.codigoPais}
-          />
+
+          <Suspense fallback={<p className="loading">Carregando gráfico...</p>}>
+            <ForecastGraph
+              clima={clima}
+              nomeCidade={cidade.nome}
+              timezone={cidade.timezone}
+              codigoPais={cidade.codigoPais}
+            />
+          </Suspense>
+
           <Moon
             lat={cidade.latitude}
             lon={cidade.longitude}
@@ -210,7 +204,9 @@ export default function Japao() {
           />
         </div>
       ) : (
-        <p className="mensagemAviso">Não foi possível carregar os dados meteorológicos.</p>
+        <p className="mensagemAviso">
+          Não foi possível carregar os dados meteorológicos.
+        </p>
       )}
     </div>
   );
